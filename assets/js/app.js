@@ -6,34 +6,342 @@ const CURRENCY = new Intl.NumberFormat('pt-BR', {
 });
 
 const catalog = [
-  { id: 'Casa Madrid', name: 'Casa Madrid', type: 'casa', price: 990, period: '/noite', badge: 'Novo', location: 'Madrid', details: { suites: 3, quartos: 3, banheiros: 1, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/Casa Madrid/1.jpeg' },
-  { id: 'Casa10', name: 'Casa Portal 2', type: 'casa', price: 1250, period: '/noite', badge: 'Destaque', location: 'Jardin Portal', details: { suites: 3, quartos: 4, banheiros: 4, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Eletrodomesticos', 'Banheiro social', 'Garagem 3 Carros', 'Mesa de Sinuca', 'Som', 'Lavanderia'], image: 'casas/Casa10/1.jpeg' },
-  { id: 'casa1', name: 'Casa Luxo Grécia', type: 'casa', price: 990, period: '/noite', badge: 'Destaque', location: 'Jardin Grécia', details: { suites: 3, quartos: 3, banheiros: 4, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Eletrodomesticos', 'Banheiro social', 'Tvs nos Quartos', 'Lavanderia'], image: 'casas/casa1/1.webp' },
-  { id: 'casa11', name: 'Casa Riviera 5', type: 'casa', price: 1350, period: '/noite', badge: 'Destaque', location: 'Jardin Riviera', details: { suites: 1, quartos: 3, banheiros: 3, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Cervejeira', 'Churrasqueira', 'Cozinha completa', 'Eletrodomesticos', 'Banheiro social', 'Lavanderia'], image: 'casas/casa11/1.webp' },
-  { id: 'casa12', name: 'Casa Riviera 6', type: 'casa', price: 1150, period: '/noite', badge: 'Destaque', location: 'Jardin Riviera', details: { suites: 1, quartos: 3, banheiros: 3, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Eletrodomesticos', 'Banheiro social', 'Lavanderia'], image: 'casas/casa12/1.webp' },
-  { id: 'casa13', name: 'Casa Bela Vista 3', type: 'casa', price: 1250, period: '/noite', badge: 'Destaque', location: 'Bela Vista', details: { suites: 3, quartos: 3, banheiros: 4, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Eletrodomesticos', 'Banheiro social', 'Tvs nos Quartos', 'Lavanderia'], image: 'casas/casa13/1.webp' },
-  { id: 'casa2', name: 'Casa Riviera', type: 'casa', price: 1400, period: '/noite', badge: 'Destaque', location: 'Jardin Riviera', details: { suites: 2, quartos: 4, banheiros: 4, pessoas: 14 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa2/1.webp' },
-  { id: 'casa4', name: 'Casa Riviera 2', type: 'casa', price: 1100, period: '/noite', badge: 'Novidade', location: 'Jardin Portal', details: { suites: 1, quartos: 3, banheiros: 2, pessoas: 8 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Microondas', 'Forno Eletrico', 'Cozinha Completa', 'Lavanderia'], image: 'casas/casa4/1.webp' },
-  { id: 'casa5', name: 'Casa Grécia', type: 'casa', price: 1200, period: '/noite', badge: 'Destaque', location: 'Jardin Grécia', details: { suites: 1, quartos: 3, banheiros: 2, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa5/1_n.webp' },
-  { id: 'casa6', name: 'Sobrado Maliboo', type: 'casa', price: 1250, period: '/noite', badge: 'Novo', location: 'Maliboo', details: { suites: 1, quartos: 4, banheiros: 3, pessoas: 16 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa6/1.webp' },
-  { id: 'casa7', name: 'Sobrado Grécia', type: 'casa', price: 1550, period: '/Diária', badge: 'Novo', location: 'Grécia', details: { suites: 2, quartos: 5, banheiros: 4, pessoas: 18 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa7/1.webp' },
-  { id: 'casa8', name: 'Casa Riviera 3', type: 'casa', price: 1200, period: '/noite', badge: 'Novo', location: 'Riviera', details: { suites: 3, quartos: 3, banheiros: 3, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa8/1.webp' },
-  { id: 'casa9', name: 'Sobrado Riviera 4', type: 'casa', price: 1300, period: '/noite', badge: 'Novo', location: 'Riviera', details: { suites: 3, quartos: 4, banheiros: 4, pessoas: 12 }, amenities: ['Piscina', 'Wi-Fi', 'Ar condicionado', 'Churrasqueira', 'Cozinha completa', 'Lavanderia'], image: 'casas/casa9/1.webp' },
-  { id: 'Catamara Aurora 750', name: 'Catamarã Aurora 750', type: 'embarcacao', price: 4500, period: '/Dia', badge: 'Novo', location: 'Aguas de Porto Rico', details: { pessoas: 17, motor: '150 hp', modelo: 'Catamarã Aurora 750' }, amenities: ['Guia Experiente', 'Guarda-Sol', 'Coletes Salva Vidas', 'Pia', 'Churrasqueira'], image: 'casas/Catamara Aurora 750/1.jpeg' },
-  { id: 'Catamara Vcat 750', name: 'Catamarã Vcat 750', type: 'embarcacao', price: 4500, period: '/Dia', badge: 'Novo', location: 'Hangar 365', details: { pessoas: 17, motor: '200 hp', modelo: 'Catamarã Vcat 750' }, amenities: ['Guia Experiente', 'Guarda-Sol', 'Cadeiras de Praia', 'Coletes Salva Vidas', 'Pia', 'Churrasqueira', 'Banheiro Privativo'], image: 'casas/Catamara Vcat 750/1.webp' },
-  { id: 'Catamara Vcat 900', name: 'Catamarã Vcat 900', type: 'embarcacao', price: 4500, period: '/Dia', badge: 'Novo', location: 'Porto Seguro', details: { pessoas: 20, motor: '200 hp', modelo: 'Catamarã Vcat 900' }, amenities: ['Guia Experiente', 'Tenda', 'Coletes Salva Vidas', 'Pia', 'Churrasqueira a Gás'], image: 'casas/Catamara Vcat 900/1.webp' },
-  { id: 'GTI 170', name: 'Jetski Sea-Doo Gti 170', type: 'embarcacao', price: 1700, period: '/Dia', badge: 'Novo', location: 'Hangar 365', details: { pessoas: 3, motor: '170 hp', modelo: 'Gti 170' }, amenities: ['Colete Salva-vidas', 'Sistema iBR (freio e ré)'], image: 'casas/GTI 170/1.jpeg' },
-  { id: 'Gti 170 SE', name: 'Jetski Sea-Doo Gti 170 Se', type: 'embarcacao', price: 1700, period: '/Dia', badge: 'Novo', location: 'Aluga Porto', details: { pessoas: 3, motor: '170 hp', modelo: 'Gti 170 Se' }, amenities: ['Colete Salva-vidas', 'Sistema iBR (freio e ré)'], image: 'casas/Gti 170 SE/1.jpeg' },
-  { id: 'Lancha FS 230', name: 'FS 230', type: 'embarcacao', price: 2900, period: '/Dia', badge: 'Novo', location: 'Marina', details: { pessoas: 9, motor: '250 hp', modelo: 'FS 230' }, amenities: ['Guia Experiente', 'Colete Salva Vidas', 'Banheiro Privativo'], image: 'casas/Lancha FS 230/1.jpeg' },
-  { id: 'Lancha Focker 188', name: 'Lancha Focker 188', type: 'embarcacao', price: 2000, period: '/Dia', badge: 'Novo', location: 'Marina Grecia', details: { pessoas: 7, motor: '100 hp', modelo: 'Lancha Focker 188' }, amenities: ['Guia Experiente', 'Coletes Salva Vidas', 'Som'], image: 'casas/Lancha Focker 188/1.jpeg' },
-  { id: 'Lancha Focker 272', name: 'Lancha Focker 272', type: 'embarcacao', price: 3500, period: '/Dia', badge: 'Novo', location: 'Porto Rico Resort', details: { pessoas: 13, motor: '300 hp', modelo: 'Focker 272' }, amenities: ['Coletes Salva-vidas', 'Som bluetooth', '2 Guarda Sol'], image: 'casas/Lancha Focker 272/1.webp' },
-  { id: 'Lancha Naja 195', name: 'Lancha Naja 195', type: 'embarcacao', price: 2000, period: '/Dia', badge: 'Novo', location: 'Marina Aluga Porto', details: { pessoas: 7, motor: '135 hp', modelo: 'Lancha Naja 195' }, amenities: ['Guia Experiente', 'Guarda-Sol', 'Coletes Salva Vidas', 'Pia', 'Churrasqueira', 'Som'], image: 'casas/Lancha Naja 195/1.jpeg' },
-  { id: 'Lancha Nhd 270', name: 'Lancha Nhd 270', type: 'embarcacao', price: 3500, period: '/Dia', badge: 'Novo', location: 'Marina Aluga Porto', details: { pessoas: 13, motor: '250 hp', modelo: 'Lancha Nhd 270' }, amenities: ['Guia Experiente', 'Coletes Salva Vidas', 'Pia', 'Churrasqueira', 'Banheiro Privativo'], image: 'casas/Lancha Nhd 270/1.jpeg' },
-  { id: 'Mestra 210', name: 'Lancha Mestra 210', type: 'embarcacao', price: 2500, period: '/Dia', badge: 'Novo', location: 'Aluga Porto', details: { pessoas: 9, motor: '200 hp', modelo: 'Mestra 210' }, amenities: ['Coletes Salva-vidas', 'Som bluetooth', 'Churrasqueira', 'Guarda-Sol'], image: 'casas/Mestra 210/1.webp' },
-  { id: 'Mestra 222', name: 'Lancha Mestra 222', type: 'embarcacao', price: 3500, period: '/Dia', badge: 'Novo', location: 'Aluga Porto', details: { pessoas: 11, motor: '200 hp', modelo: 'Mestra 222' }, amenities: ['Coletes Salva-vidas', 'Som bluetooth', 'Churrasqueira'], image: 'casas/Mestra 222/1.jpeg' },
-  { id: 'NX 280', name: 'Nx 280', type: 'embarcacao', price: 4000, period: '/Dia', badge: 'Novo', location: 'Marina Grecia', details: { pessoas: 13, motor: '300 hp', modelo: 'Nx 280' }, amenities: ['Guia Experiente', 'Colete Salva Vidas', 'Banheiro Privativo'], image: 'casas/NX 280/1.jpeg' },
-  { id: 'Phoenix 270', name: 'Phoenix 270', type: 'embarcacao', price: 3500, period: '/Dia', badge: 'Novo', location: 'Marina', details: { pessoas: 10, motor: '300 hp', modelo: 'Phoenix 270' }, amenities: ['Guia Experiente', 'Colete Salva Vidas', 'Banheiro Privativo'], image: 'casas/Phoenix 270/1.jpeg' },
-  { id: 'Wake 230 Pro', name: 'Jetski Sea-Doo Wake 230', type: 'embarcacao', price: 1800, period: '/Dia', badge: 'Novo', location: 'Aluga Porto', details: { pessoas: 3, motor: '230 hp', modelo: 'Wake 230' }, amenities: ['Colete Salva-vidas', 'Som Bluetooth', 'Sistema iBR (freio e ré)'], image: 'casas/Wake 230 Pro/1.jpeg' }
+  {
+    "id": "Casa Madrid",
+    "name": "Casa Madrid",
+    "type": "casa",
+    "price": 990,
+    "period": "/noite",
+    "badge": "Novo",
+    "location": "Madrid",
+    "details": { "suites": 3, "quartos": 3, "banheiros": 1, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/Casa Madrid/1.jpeg"
+  },
+  {
+    "id": "Casa10",
+    "name": "Casa Portal 2",
+    "type": "casa",
+    "price": 1250,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Portal",
+    "details": { "suites": 3, "quartos": 4, "banheiros": 4, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Garagem 3 Carros", "Mesa de Sinuca", "Som", "Lavanderia"],
+    "image": "casas/Casa10/1.jpeg"
+  },
+  {
+    "id": "Catamara Aurora 750",
+    "name": "Catamarã Aurora 750",
+    "type": "embarcacao",
+    "price": 4500,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Aguas de Porto Rico",
+    "details": { "pessoas": 17, "motor": "150 hp", "modelo": "Catamarã Aurora 750" },
+    "amenities": ["Guia Experiente", "Guarda-Sol", "Coletes Salva Vidas", "Pia", "Churrasqueira"],
+    "image": "casas/Catamara Aurora 750/1.jpeg"
+  },
+  {
+    "id": "Catamara Vcat 750",
+    "name": "Catamarã Vcat 750",
+    "type": "embarcacao",
+    "price": 4500,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Hangar 365",
+    "details": { "pessoas": 17, "motor": "200 hp", "modelo": "Catamarã Vcat 750" },
+    "amenities": ["Guia Experiente", "Guarda-Sol", "Cadeiras de Praia", "Coletes Salva Vidas", "Pia", "Churrasqueira", "Banheiro Privativo"],
+    "image": "casas/Catamara Vcat 750/1.webp"
+  },
+  {
+    "id": "Catamara Vcat 900",
+    "name": "Catamarã Vcat 900",
+    "type": "embarcacao",
+    "price": 4500,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Porto Seguro",
+    "details": { "pessoas": 20, "motor": "200 hp", "modelo": "Catamarã Vcat 900" },
+    "amenities": ["Guia Experiente", "Tenda", "Coletes Salva Vidas", "Pia", "Churrasqueira a Gás"],
+    "image": "casas/Catamara Vcat 900/1.webp"
+  },
+  {
+    "id": "GTI 170",
+    "name": "Jetski Sea-Doo Gti 170",
+    "type": "embarcacao",
+    "price": 1700,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Hangar 365",
+    "details": { "pessoas": 3, "motor": "170 hp", "modelo": "Gti 170" },
+    "amenities": ["Colete Salva-vidas", "Sistema iBR (freio e ré)"],
+    "image": "casas/GTI 170/1.jpeg"
+  },
+  {
+    "id": "Gti 170 SE",
+    "name": "Jetski Sea-Doo Gti 170 Se",
+    "type": "embarcacao",
+    "price": 1700,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Aluga Porto",
+    "details": { "pessoas": 3, "motor": "170 hp", "modelo": "Gti 170 Se" },
+    "amenities": ["Colete Salva-vidas", "Sistema iBR (freio e ré)"],
+    "image": "casas/Gti 170 SE/1.jpeg"
+  },
+  {
+    "id": "Lancha FS 230",
+    "name": "FS 230",
+    "type": "embarcacao",
+    "price": 2900,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina",
+    "details": { "pessoas": 9, "motor": "250 hp", "modelo": "FS 230" },
+    "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
+    "image": "casas/Lancha FS 230/1.jpeg"
+  },
+  {
+    "id": "Lancha Focker 188",
+    "name": "Lancha Focker 188",
+    "type": "embarcacao",
+    "price": 2000,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina Grecia",
+    "details": { "pessoas": 7, "motor": "100 hp", "modelo": "Lancha Focker 188" },
+    "amenities": ["Guia Experiente", "Coletes Salva Vidas", "Som"],
+    "image": "casas/Lancha Focker 188/1.jpeg"
+  },
+  {
+    "id": "Lancha Focker 272",
+    "name": "Lancha Focker 272",
+    "type": "embarcacao",
+    "price": 3500,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Porto Rico Resort",
+    "details": { "pessoas": 13, "motor": "300 hp", "modelo": "Focker 272" },
+    "amenities": ["Coletes Salva-vidas", "Som bluetooth", "2 Guarda Sol"],
+    "image": "casas/Lancha Focker 272/1.webp"
+  },
+  {
+    "id": "Lancha Naja 195",
+    "name": "Lancha Naja 195",
+    "type": "embarcacao",
+    "price": 2000,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina Aluga Porto",
+    "details": { "pessoas": 7, "motor": "135 hp", "modelo": "Lancha Naja 195" },
+    "amenities": ["Guia Experiente", "Guarda-Sol", "Coletes Salva Vidas", "Pia", "Churrasqueira", "Som"],
+    "image": "casas/Lancha Naja 195/1.jpeg"
+  },
+  {
+    "id": "Lancha Nhd 270",
+    "name": "Lancha Nhd 270",
+    "type": "embarcacao",
+    "price": 3500,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina Aluga Porto",
+    "details": { "pessoas": 13, "motor": "250 hp", "modelo": "Lancha Nhd 270" },
+    "amenities": ["Guia Experiente", "Coletes Salva Vidas", "Pia", "Churrasqueira", "Banheiro Privativo"],
+    "image": "casas/Lancha Nhd 270/1.jpeg"
+  },
+  {
+    "id": "Mestra 210",
+    "name": "Lancha Mestra 210",
+    "type": "embarcacao",
+    "price": 2500,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Aluga Porto",
+    "details": { "pessoas": 9, "motor": "200 hp", "modelo": "Mestra 210" },
+    "amenities": ["Coletes Salva-vidas", "Som bluetooth", "Churrasqueira", "Guarda-Sol"],
+    "image": "casas/Mestra 210/1.webp"
+  },
+  {
+    "id": "Mestra 222",
+    "name": "Lancha Mestra 222",
+    "type": "embarcacao",
+    "price": 3500,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Aluga Porto",
+    "details": { "pessoas": 11, "motor": "200 hp", "modelo": "Mestra 222" },
+    "amenities": ["Coletes Salva-vidas", "Som bluetooth", "Churrasqueira"],
+    "image": "casas/Mestra 222/1.jpeg"
+  },
+  {
+    "id": "NX 280",
+    "name": "Nx 280",
+    "type": "embarcacao",
+    "price": 4000,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina Grecia",
+    "details": { "pessoas": 13, "motor": "300 hp", "modelo": "Nx 280" },
+    "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
+    "image": "casas/NX 280/1.jpeg"
+  },
+  {
+    "id": "Phoenix 270",
+    "name": "Phoenix 270",
+    "type": "embarcacao",
+    "price": 3500,
+    "period": "/Dia)",
+    "badge": "Novo",
+    "location": "Marina",
+    "details": { "pessoas": 10, "motor": "300 hp", "modelo": "Phoenix 270" },
+    "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
+    "image": "casas/Phoenix 270/1.jpeg"
+  },
+  {
+    "id": "Wake 230 Pro",
+    "name": "Jetski Sea-Doo Wake 230",
+    "type": "embarcacao",
+    "price": 1800,
+    "period": "/Dia",
+    "badge": "Novo",
+    "location": "Aluga Porto",
+    "details": { "pessoas": 3, "motor": "230 hp", "modelo": "Wake 230" },
+    "amenities": ["Colete Salva-vidas", "Som Bluetooth", "Sistema iBR (freio e ré)"],
+    "image": "casas/Wake 230 Pro/1.jpeg"
+  },
+  {
+    "id": "casa1",
+    "name": "Casa Luxo Grécia",
+    "type": "casa",
+    "price": 990,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Grécia",
+    "details": { "suites": 3, "quartos": 3, "banheiros": 4, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Tvs nos Quartos", "Lavanderia"],
+    "image": "casas/casa1/1.webp"
+  },
+  {
+    "id": "casa11",
+    "name": "Casa Riviera 5",
+    "type": "casa",
+    "price": 1350,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Riviera",
+    "details": { "suites": 1, "quartos": 3, "banheiros": 3, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Cervejeira", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Lavanderia"],
+    "image": "casas/casa11/1.webp"
+  },
+  {
+    "id": "casa12",
+    "name": "Casa Riviera 6",
+    "type": "casa",
+    "price": 1150,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Riviera",
+    "details": { "suites": 1, "quartos": 3, "banheiros": 3, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Lavanderia"],
+    "image": "casas/casa12/1.webp"
+  },
+  {
+    "id": "casa13",
+    "name": "Casa Bela Vista 3",
+    "type": "casa",
+    "price": 1250,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Bela Vista",
+    "details": { "suites": 3, "quartos": 3, "banheiros": 4, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Tvs nos Quartos", "Lavanderia"],
+    "image": "casas/casa13/1.webp"
+  },
+  {
+    "id": "casa2",
+    "name": "Casa Riviera",
+    "type": "casa",
+    "price": 1400,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Riviera",
+    "details": { "suites": 2, "quartos": 4, "banheiros": 4, "pessoas": 14 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa2/1.webp"
+  },
+  {
+    "id": "casa4",
+    "name": "Casa Riviera 2",
+    "type": "casa",
+    "price": 1100,
+    "period": "/noite",
+    "badge": "Novidade",
+    "location": "Jardin Portal",
+    "details": { "suites": 1, "quartos": 3, "banheiros": 2, "pessoas": 8 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Microondas", "Forno Eletrico", "Cozinha Completa", "Lavanderia"],
+    "image": "casas/casa4/1.webp"
+  },
+  {
+    "id": "casa5",
+    "name": "Casa Grécia",
+    "type": "casa",
+    "price": 1200,
+    "period": "/noite",
+    "badge": "Destaque",
+    "location": "Jardin Grécia",
+    "details": { "suites": 1, "quartos": 3, "banheiros": 2, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa5/1_n.webp"
+  },
+  {
+    "id": "casa6",
+    "name": "Sobrado Maliboo",
+    "type": "casa",
+    "price": 1250,
+    "period": "/noite",
+    "badge": "Novo",
+    "location": "Maliboo",
+    "details": { "suites": 1, "quartos": 4, "banheiros": 3, "pessoas": 16 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa6/1.webp"
+  },
+  {
+    "id": "casa7",
+    "name": "Sobrado Grécia",
+    "type": "casa",
+    "price": 1550,
+    "period": "/Diária",
+    "badge": "Novo",
+    "location": "Grécia",
+    "details": { "suites": 2, "quartos": 5, "banheiros": 4, "pessoas": 18 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa7/1.webp"
+  },
+  {
+    "id": "casa8",
+    "name": "Casa Riviera 3",
+    "type": "casa",
+    "price": 1200,
+    "period": "/noite",
+    "badge": "Novo",
+    "location": "Riviera",
+    "details": { "suites": 3, "quartos": 3, "banheiros": 3, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa8/1.webp"
+  },
+  {
+    "id": "casa9",
+    "name": "Sobrado Riviera 4",
+    "type": "casa",
+    "price": 1300,
+    "period": "/noite",
+    "badge": "Novo",
+    "location": "Riviera",
+    "details": { "suites": 3, "quartos": 4, "banheiros": 4, "pessoas": 12 },
+    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
+    "image": "casas/casa9/1.webp"
+  }
 ];
 
 const state = {
@@ -65,10 +373,6 @@ const formFields = {
   notes: document.querySelector('#interestNotes')
 };
 
-function typeLabel(type) {
-  return { casa: 'Casa', embarcacao: 'Embarcação' }[type] || type;
-}
-
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -84,6 +388,23 @@ function encodeImagePath(path) {
 
 function formatMoney(value) {
   return CURRENCY.format(value);
+}
+
+function normalizePeriod(period) {
+  return String(period || '').replace(/[)]+$/g, '').trim();
+}
+
+function getCategory(item) {
+  if (item.type === 'casa') return 'casa';
+  return item.name.toLowerCase().includes('jetski') ? 'jetski' : 'lancha';
+}
+
+function categoryLabel(category) {
+  return {
+    casa: 'Casas de temporada',
+    lancha: 'Lanchas e catamarãs',
+    jetski: 'Jet skis'
+  }[category] || category;
 }
 
 function isSelected(id) {
@@ -103,37 +424,36 @@ function shortDescription(item) {
 }
 
 function detailChips(item) {
-  const chips = [];
   if (item.type === 'casa') {
+    const chips = [];
     if (item.details.suites) chips.push(`${item.details.suites} suítes`);
     if (item.details.quartos) chips.push(`${item.details.quartos} quartos`);
     if (item.details.banheiros) chips.push(`${item.details.banheiros} banheiros`);
     if (item.details.pessoas) chips.push(`${item.details.pessoas} pessoas`);
-  } else {
-    if (item.details.modelo) chips.push(item.details.modelo);
-    if (item.details.motor) chips.push(item.details.motor);
-    if (item.details.pessoas) chips.push(`${item.details.pessoas} pessoas`);
+    return chips;
   }
-  return chips;
+
+  return [
+    item.details.modelo,
+    item.details.motor,
+    `${item.details.pessoas} pessoas`
+  ].filter(Boolean);
 }
 
 function filteredCatalog() {
   return catalog.filter(item => {
-    const matchesCategory = state.filter === 'todos' || item.type === state.filter;
+    const matchesCategory = state.filter === 'todos' || getCategory(item) === state.filter;
     const matchesPeople = !state.people || Number(item.details.pessoas || 0) >= Number(state.people);
     return matchesCategory && matchesPeople;
   });
 }
 
-function renderCatalog() {
-  const items = filteredCatalog();
-  emptyState.hidden = items.length > 0;
-
-  grid.innerHTML = items.map(item => `
+function renderCard(item) {
+  return `
     <article class="card product-card">
       <div class="card-copy">
         <div class="card-meta">
-          <span>${escapeHtml(typeLabel(item.type))}</span>
+          <span>${escapeHtml(categoryLabel(getCategory(item)))}</span>
           <span>${escapeHtml(item.location)}</span>
         </div>
         <h3>${escapeHtml(item.name)}</h3>
@@ -146,8 +466,8 @@ function renderCatalog() {
         </div>
         <div class="card-footer">
           <div class="price">
-            <small>${item.priceLabel || 'A partir de'}</small>
-            <strong>${formatMoney(item.price)} ${escapeHtml(item.period)}</strong>
+            <small>${escapeHtml(normalizePeriod(item.period) || 'A partir de')}</small>
+            <strong>${formatMoney(item.price)}</strong>
           </div>
           <div class="card-actions">
             <button class="details-button" type="button" data-details="${escapeHtml(item.id)}">Detalhes</button>
@@ -159,7 +479,35 @@ function renderCatalog() {
         <span class="card-badge">${escapeHtml(item.badge)}</span>
       </div>
     </article>
-  `).join('');
+  `;
+}
+
+function renderCatalog() {
+  const items = filteredCatalog();
+  emptyState.hidden = items.length > 0;
+
+  const groups = ['casa', 'lancha', 'jetski'];
+  const groupedHtml = groups.map(group => {
+    const groupItems = items.filter(item => getCategory(item) === group);
+    if (!groupItems.length) return '';
+
+    return `
+      <section class="catalog-group">
+        <div class="catalog-group-header">
+          <div>
+            <span class="eyebrow dark">${escapeHtml(categoryLabel(group))}</span>
+            <h3>${escapeHtml(categoryLabel(group))}</h3>
+          </div>
+          <small>${groupItems.length} item(ns)</small>
+        </div>
+        <div class="catalog-group-grid">
+          ${groupItems.map(renderCard).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
+
+  grid.innerHTML = groupedHtml;
 }
 
 function toggleSelection(id) {
@@ -179,7 +527,7 @@ function updateSelectionUI() {
       <img src="${encodeImagePath(item.image)}" alt="${escapeHtml(item.name)}">
       <div>
         <h4>${escapeHtml(item.name)}</h4>
-        <small>${escapeHtml(item.location)} • ${formatMoney(item.price)} ${escapeHtml(item.period)}</small>
+        <small>${escapeHtml(normalizePeriod(item.period))} • ${formatMoney(item.price)}</small>
       </div>
       <button type="button" data-remove="${escapeHtml(item.id)}" aria-label="Remover">×</button>
     </div>
@@ -205,19 +553,15 @@ function openModal(id) {
   modalContent.innerHTML = `
     <div class="modal-image" style="background-image:url('${encodeImagePath(item.image)}')"></div>
     <div class="modal-body">
-      <span class="eyebrow dark">${escapeHtml(typeLabel(item.type))} • ${escapeHtml(item.location)}</span>
+      <span class="eyebrow dark">${escapeHtml(categoryLabel(getCategory(item)))} • ${escapeHtml(item.location)}</span>
       <h2>${escapeHtml(item.name)}</h2>
-      <p>${escapeHtml(shortDescription(item))} O cartão foi montado para ficar com cara de catálogo, com preço, características e ação rápida para o WhatsApp.</p>
-      <div class="card-features">
-        ${detailChips(item).map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}
-      </div>
-      <div class="card-features">
-        ${item.amenities.map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}
-      </div>
+      <p>${escapeHtml(shortDescription(item))} O cartão foi montado para parecer um catálogo de produto, com foco em preço, características e ação rápida para o WhatsApp.</p>
+      <div class="card-features">${detailChips(item).map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}</div>
+      <div class="card-features">${item.amenities.map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}</div>
       <div class="modal-actions">
         <div class="price">
-          <small>${item.priceLabel || 'A partir de'}</small>
-          <strong>${formatMoney(item.price)} ${escapeHtml(item.period)}</strong>
+          <small>${escapeHtml(normalizePeriod(item.period) || 'A partir de')}</small>
+          <strong>${formatMoney(item.price)}</strong>
         </div>
         <button class="btn btn-primary" type="button" data-modal-select="${escapeHtml(item.id)}">${isSelected(item.id) ? 'Remover do pedido' : 'Adicionar ao pedido'}</button>
       </div>
@@ -261,10 +605,10 @@ function buildWhatsAppMessage(items) {
   const notes = formFields.notes.value.trim();
 
   const productLines = items.flatMap(item => {
-    const priceLabel = `${formatMoney(item.price)} ${item.period}`;
+    const priceLine = `${formatMoney(item.price)} ${normalizePeriod(item.period)}`;
     return [
-      `X1 ${item.name} – ${typeLabel(item.type)} ${priceLabel}`,
-      `    1 Unidade(s) ${priceLabel}`,
+      `X1 ${item.name} – ${categoryLabel(getCategory(item))} ${priceLine}`,
+      `    1 Unidade(s) ${priceLine}`,
       ...detailChips(item).map(chip => `    +1 ${chip}`)
     ];
   });
