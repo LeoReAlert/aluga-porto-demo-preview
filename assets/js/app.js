@@ -367,6 +367,7 @@ const formFields = {
   address: document.querySelector('#customerAddress'),
   serviceType: document.querySelector('#serviceType'),
   date: document.querySelector('#interestDate'),
+  days: document.querySelector('#rentalDays'),
   time: document.querySelector('#interestTime'),
   paymentStatus: document.querySelector('#paymentStatus'),
   paymentMethod: document.querySelector('#paymentMethod'),
@@ -593,6 +594,9 @@ function buildRequestCode() {
 
 function buildWhatsAppMessage(items) {
   const subtotal = items.reduce((total, item) => total + Number(item.price || 0), 0);
+  const rentalDays = Number(formFields.days.value || 1);
+  const total = subtotal * rentalDays;
+  const dayLabel = rentalDays === 1 ? '1 dia' : `${rentalDays} dias`;
   const requestCode = buildRequestCode();
   const serviceType = formFields.serviceType.value || 'Reserva';
   const formattedDate = formFields.date.value ? new Date(`${formFields.date.value}T12:00:00`).toLocaleDateString('pt-BR') : 'A definir';
@@ -607,37 +611,46 @@ function buildWhatsAppMessage(items) {
   const productLines = items.flatMap(item => {
     const priceLine = `${formatMoney(item.price)} ${normalizePeriod(item.period)}`;
     return [
-      `X1 ${item.name} – ${categoryLabel(getCategory(item))} ${priceLine}`,
-      `    1 Unidade(s) ${priceLine}`,
-      ...detailChips(item).map(chip => `    +1 ${chip}`)
+      `🏷️ ${item.name}`,
+      `   • Categoria: ${categoryLabel(getCategory(item))}`,
+      `   • Valor base: ${priceLine}`,
+      `   • Quantidade: 1 unidade`,
+      ...detailChips(item).map(chip => `   ✨ ${chip}`)
     ];
   });
 
   return [
-    `👋 Venho de ${SITE_URL}`,
-    requestCode,
-    `🗓️ ${formattedDate} ⏰ ${formattedTime}`,
+    '👋 Olá, vim pelo catálogo Aluga Porto',
+    `🔗 ${SITE_URL}`,
+    `🧾 Pedido: ${requestCode}`,
     '',
-    `Tipo de serviço: ${serviceType}`,
+    '📌 *Dados da reserva*',
+    `• Tipo de serviço: ${serviceType}`,
+    `• Data desejada: ${formattedDate}`,
+    `• Horário: ${formattedTime}`,
+    `• Período: ${dayLabel}`,
     '',
-    `Nome: ${customerName}`,
-    `Telefone: ${customerPhone}`,
-    `Endereço: ${customerAddress}`,
+    '🙋 *Cliente*',
+    `• Nome: ${customerName}`,
+    `• Telefone: ${customerPhone}`,
+    `• Endereço / referência: ${customerAddress}`,
     '',
-    '📝 Aluguéis selecionados',
+    '🛥️ *Aluguéis selecionados*',
     ...productLines,
     '',
-    `Subtotal: ${formatMoney(subtotal)}`,
-    'Delivery: A definir',
-    `Total: ${formatMoney(subtotal)}`,
+    '💰 *Resumo de valores*',
+    `• Subtotal base: ${formatMoney(subtotal)}`,
+    `• Quantidade de dias: ${dayLabel}`,
+    `• Total estimado: ${formatMoney(total)}`,
     '',
-    '💲 Pagamento',
-    `Estado do pagamento: ${paymentStatus}`,
-    `Total a pagar: ${formatMoney(subtotal)}`,
-    paymentMethod,
-    notes ? `📝 Observação: ${notes}` : '',
+    '💳 *Pagamento*',
+    `• Estado do pagamento: ${paymentStatus}`,
+    `• Total a pagar: ${formatMoney(total)}`,
+    `• Forma de pagamento: ${paymentMethod}`,
+    notes ? `📝 *Observação:* ${notes}` : '',
     '',
-    '👆 Por favor, envie-nos esta mensagem agora. Assim que recebermos estaremos atendendo você.'
+    '✅ Pode verificar a disponibilidade pra mim?',
+    '📲 Aguardo o retorno, obrigado!'
   ].filter(Boolean).join('\n');
 }
 
