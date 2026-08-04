@@ -408,6 +408,14 @@ function categoryLabel(category) {
   }[category] || category;
 }
 
+function categoryIcon(category) {
+  return {
+    casa: '🏡',
+    lancha: '🛥️',
+    jetski: '🌊'
+  }[category] || '✨';
+}
+
 function isSelected(id) {
   return state.selected.includes(id);
 }
@@ -422,6 +430,30 @@ function shortDescription(item) {
     return `Casa de temporada em ${item.location}, com ${item.details.quartos} quartos, ${item.details.banheiros} banheiros e capacidade para até ${item.details.pessoas} pessoas.`;
   }
   return `${item.details.modelo} em ${item.location}, com ${item.details.motor} e capacidade para ${item.details.pessoas} pessoas.`;
+}
+
+function whatsAppDescription(item) {
+  const category = getCategory(item);
+  const amenities = item.amenities.slice(0, 4).join(', ');
+
+  if (category === 'casa') {
+    return [
+      `📝 Descrição: casa de temporada em ${item.location}, ideal para família e amigos.`,
+      item.details.quartos ? `🛏️ Quartos: ${item.details.quartos}` : '',
+      item.details.suites ? `🚿 Suítes: ${item.details.suites}` : '',
+      item.details.banheiros ? `🚽 Banheiros: ${item.details.banheiros}` : '',
+      item.details.pessoas ? `👥 Capacidade: até ${item.details.pessoas} pessoas` : '',
+      amenities ? `✨ Destaques: ${amenities}` : ''
+    ].filter(Boolean);
+  }
+
+  return [
+    `📝 Descrição: ${item.details.modelo || item.name} disponível para passeio em ${item.location}.`,
+    item.details.modelo ? `⚓ Modelo: ${item.details.modelo}` : '',
+    item.details.motor ? `🚤 Motor: ${item.details.motor}` : '',
+    item.details.pessoas ? `👥 Capacidade: até ${item.details.pessoas} pessoas` : '',
+    amenities ? `✨ Incluso/estrutura: ${amenities}` : ''
+  ].filter(Boolean);
 }
 
 function detailChips(item) {
@@ -609,50 +641,52 @@ function buildWhatsAppMessage(items, options = {}) {
   const paymentMethod = formFields.paymentMethod.value || 'A definir';
   const notes = formFields.notes.value.trim();
 
-  const productLines = items.flatMap(item => {
+  const rentalLines = items.flatMap(item => {
+    const category = getCategory(item);
     const priceLine = `${formatMoney(item.price)} ${normalizePeriod(item.period)}`;
     return [
-      `🏷️ ${item.name}`,
-      `   • Categoria: ${categoryLabel(getCategory(item))}`,
-      `   • Valor base: ${priceLine}`,
-      `   • Quantidade: 1 unidade`,
-      ...detailChips(item).map(chip => `   ✨ ${chip}`)
+      `${categoryIcon(category)} *${item.name}*`,
+      `📂 Categoria: ${categoryLabel(category)}`,
+      `📍 Local/região: ${item.location}`,
+      ...whatsAppDescription(item),
+      `💵 Valor base: ${priceLine}`,
+      `🔢 Quantidade: 1 unidade`
     ];
   });
   const customerLines = options.includeCustomer === false ? [] : [
     '',
     '🙋 *Cliente*',
-    `• Nome: ${customerName}`,
-    `• Telefone: ${customerPhone}`,
-    `• Endereço / referência: ${customerAddress}`
+    `👤 Nome: ${customerName}`,
+    `📞 Telefone: ${customerPhone}`,
+    `📍 Endereço / referência: ${customerAddress}`
   ];
   const paymentLines = options.includePayment === false ? [] : [
     '',
     '💳 *Pagamento*',
-    `• Estado do pagamento: ${paymentStatus}`,
-    `• Total a pagar: ${formatMoney(total)}`,
-    `• Forma de pagamento: ${paymentMethod}`
+    `📌 Estado do pagamento: ${paymentStatus}`,
+    `💰 Total a pagar: ${formatMoney(total)}`,
+    `💳 Forma de pagamento: ${paymentMethod}`
   ];
 
   return [
-    '👋 Olá, vim pelo catálogo Aluga Porto',
+    '👋 Olá! Vim pelo catálogo da Aluga Porto',
     `🔗 ${SITE_URL}`,
     `🧾 Pedido: ${requestCode}`,
     '',
-    '📌 *Dados da reserva*',
-    `• Tipo de serviço: ${serviceType}`,
-    `• Data desejada: ${formattedDate}`,
-    `• Horário: ${formattedTime}`,
-    `• Período: ${dayLabel}`,
+    '📅 *Reserva desejada*',
+    `🏷️ Tipo: ${serviceType}`,
+    `🗓️ Data: ${formattedDate}`,
+    `⏰ Horário: ${formattedTime}`,
+    `🌴 Período: ${dayLabel}`,
     ...customerLines,
     '',
-    '🛥️ *Aluguéis selecionados*',
-    ...productLines,
+    '📦 *Aluguel selecionado*',
+    ...rentalLines,
     '',
     '💰 *Resumo de valores*',
-    `• Subtotal base: ${formatMoney(subtotal)}`,
-    `• Quantidade de dias: ${dayLabel}`,
-    `• Total estimado: ${formatMoney(total)}`,
+    `💸 Subtotal base: ${formatMoney(subtotal)}`,
+    `📆 Dias de locação: ${dayLabel}`,
+    `✅ Total estimado: ${formatMoney(total)}`,
     ...paymentLines,
     notes ? `📝 *Observação:* ${notes}` : '',
     '',
