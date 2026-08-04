@@ -1,4 +1,9 @@
+const SITE_URL = 'https://alugaporto.com.br';
 const WHATSAPP_NUMBER = '5544991416218';
+const CURRENCY = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL'
+});
 
 const catalog = [
   {
@@ -9,6 +14,7 @@ const catalog = [
     location: 'Porto Rico - PR',
     people: 12,
     price: 'Sob consulta',
+    priceValue: null,
     priceLabel: 'diária a partir de',
     description: 'Casa ampla para família e amigos, com área de lazer completa e ótima localização.',
     features: ['Até 12 pessoas', 'Piscina', 'Churrasqueira', 'Wi-Fi'],
@@ -22,6 +28,7 @@ const catalog = [
     location: 'Porto Rico - PR',
     people: 10,
     price: 'Sob consulta',
+    priceValue: null,
     priceLabel: 'diária a partir de',
     description: 'Ambiente confortável e reservado para descansar e aproveitar os melhores dias no rio.',
     features: ['Até 10 pessoas', 'Área gourmet', 'Garagem', 'Ar-condicionado'],
@@ -35,6 +42,7 @@ const catalog = [
     location: 'Rio Paraná',
     people: 12,
     price: 'Sob consulta',
+    priceValue: null,
     priceLabel: 'passeio a partir de',
     description: 'Passeio com conforto e espaço para curtir o rio com amigos ou família.',
     features: ['Até 12 pessoas', 'Com piloto', 'Som a bordo', 'Colete incluso'],
@@ -48,6 +56,7 @@ const catalog = [
     location: 'Porto Rico - PR',
     people: 8,
     price: 'Sob consulta',
+    priceValue: null,
     priceLabel: 'passeio a partir de',
     description: 'Modelo esportivo para quem quer agilidade, conforto e um passeio marcante.',
     features: ['Até 8 pessoas', 'Com piloto', 'Toldo', 'Som Bluetooth'],
@@ -60,7 +69,8 @@ const catalog = [
     title: 'Jet Ski Sea-Doo GTI',
     location: 'Porto Rico - PR',
     people: 2,
-    price: 'R$ 390',
+    price: 'R$ 390,00',
+    priceValue: 390,
     priceLabel: '1 hora a partir de',
     description: 'Jet ski confortável, potente e perfeito para aproveitar as águas de Porto Rico.',
     features: ['Até 2 pessoas', 'Colete incluso', 'Orientação', 'Modelo recente'],
@@ -73,7 +83,8 @@ const catalog = [
     title: 'Jet Ski Sea-Doo Spark',
     location: 'Porto Rico - PR',
     people: 2,
-    price: 'R$ 350',
+    price: 'R$ 350,00',
+    priceValue: 350,
     priceLabel: '1 hora a partir de',
     description: 'Leve, divertido e fácil de pilotar, ideal para uma experiência rápida e emocionante.',
     features: ['Até 2 pessoas', 'Colete incluso', 'Instrução inicial', 'Econômico'],
@@ -96,13 +107,50 @@ const selectedEmpty = document.querySelector('#selectedEmpty');
 const detailsModal = document.querySelector('#detailsModal');
 const modalContent = document.querySelector('#modalContent');
 const toast = document.querySelector('#toast');
+const whatsappForm = document.querySelector('#whatsappForm');
+const searchButton = document.querySelector('#searchButton');
+
+const formFields = {
+  name: document.querySelector('#customerName'),
+  phone: document.querySelector('#customerPhone'),
+  address: document.querySelector('#customerAddress'),
+  serviceType: document.querySelector('#serviceType'),
+  date: document.querySelector('#interestDate'),
+  time: document.querySelector('#interestTime'),
+  paymentStatus: document.querySelector('#paymentStatus'),
+  paymentMethod: document.querySelector('#paymentMethod'),
+  notes: document.querySelector('#interestNotes')
+};
 
 function typeLabel(type) {
   return { casa: 'Casa de temporada', lancha: 'Lancha', jetski: 'Jet ski' }[type] || type;
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 function isSelected(id) {
   return state.selected.includes(id);
+}
+
+function formatCurrency(value) {
+  return Number.isFinite(value) ? CURRENCY.format(value) : 'A definir';
+}
+
+function formatDateInput(value) {
+  if (!value) return 'A definir';
+  const [year, month, day] = value.split('-');
+  return `${day}/${month}/${year}`;
+}
+
+function formatTimeInput(value) {
+  return value || 'A definir';
 }
 
 function saveSelection() {
@@ -122,32 +170,48 @@ function renderCatalog() {
   const items = filteredCatalog();
   emptyState.hidden = items.length > 0;
   grid.innerHTML = items.map(item => `
-    <article class="card">
-      <div class="card-media" style="background-image:url('${item.image}')">
-        <span class="card-badge">${item.badge}</span>
-        <button class="card-favorite ${isSelected(item.id) ? 'selected' : ''}" type="button" data-toggle="${item.id}" aria-label="Adicionar ${item.title} à seleção">${isSelected(item.id) ? '♥' : '♡'}</button>
-      </div>
-      <div class="card-body">
-        <div class="card-meta"><span>${typeLabel(item.type)}</span><span>${item.location}</span></div>
-        <h3>${item.title}</h3>
-        <p class="card-description">${item.description}</p>
-        <div class="card-features">${item.features.map(feature => `<span>${feature}</span>`).join('')}</div>
-        <div class="card-footer">
-          <div class="price"><small>${item.priceLabel}</small><strong>${item.price}</strong></div>
-          <button class="details-button" type="button" data-details="${item.id}">Ver detalhes</button>
+    <article class="card catalog-card">
+      <div class="card-copy">
+        <div class="card-meta">
+          <span>${escapeHtml(typeLabel(item.type))}</span>
+          <span>${escapeHtml(item.location)}</span>
         </div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p class="card-description">${escapeHtml(item.description)}</p>
+        <div class="card-features">
+          ${item.features.map(feature => `<span>${escapeHtml(feature)}</span>`).join('')}
+        </div>
+        <div class="card-footer">
+          <div class="price">
+            <small>${escapeHtml(item.priceLabel)}</small>
+            <strong>${escapeHtml(item.price)}</strong>
+          </div>
+          <div class="card-actions">
+            <button class="details-button" type="button" data-details="${item.id}">Detalhes</button>
+            <button
+              class="card-favorite ${isSelected(item.id) ? 'selected' : ''}"
+              type="button"
+              data-toggle="${item.id}"
+              aria-label="${isSelected(item.id) ? `Remover ${item.title} do pedido` : `Adicionar ${item.title} ao pedido`}"
+            >${isSelected(item.id) ? '−' : '+'}</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-media" style="background-image:url('${item.image}')">
+        <span class="card-badge">${escapeHtml(item.badge)}</span>
       </div>
     </article>
   `).join('');
 }
 
 function toggleSelection(id) {
-  state.selected = isSelected(id)
+  const wasSelected = isSelected(id);
+  state.selected = wasSelected
     ? state.selected.filter(itemId => itemId !== id)
     : [...state.selected, id];
   saveSelection();
   renderCatalog();
-  showToast(isSelected(id) ? 'Adicionado à sua seleção.' : 'Removido da sua seleção.');
+  showToast(wasSelected ? 'Removido do pedido.' : 'Adicionado ao pedido.');
 }
 
 function updateSelectionUI() {
@@ -156,8 +220,11 @@ function updateSelectionUI() {
   selectedEmpty.hidden = items.length > 0;
   selectedItems.innerHTML = items.map(item => `
     <div class="selected-item">
-      <img src="${item.image}" alt="${item.title}">
-      <div><h4>${item.title}</h4><small>${item.priceLabel}: ${item.price}</small></div>
+      <img src="${item.image}" alt="${escapeHtml(item.title)}">
+      <div>
+        <h4>${escapeHtml(item.title)}</h4>
+        <small>${escapeHtml(item.priceLabel)}: ${escapeHtml(item.price)}</small>
+      </div>
       <button type="button" data-remove="${item.id}" aria-label="Remover">×</button>
     </div>
   `).join('');
@@ -182,13 +249,13 @@ function openModal(id) {
   modalContent.innerHTML = `
     <div class="modal-image" style="background-image:url('${item.image}')"></div>
     <div class="modal-body">
-      <span class="eyebrow dark">${typeLabel(item.type)} • ${item.location}</span>
-      <h2>${item.title}</h2>
-      <p>${item.description} Esta é uma apresentação demonstrativa; na versão final podem ser adicionadas galeria de fotos, disponibilidade, regras, itens inclusos, localização e preços por período.</p>
-      <div class="card-features">${item.features.map(feature => `<span>${feature}</span>`).join('')}</div>
+      <span class="eyebrow dark">${escapeHtml(typeLabel(item.type))} • ${escapeHtml(item.location)}</span>
+      <h2>${escapeHtml(item.title)}</h2>
+      <p>${escapeHtml(item.description)} O layout foi pensado para catálogo, com navegação rápida, cartão de produto e envio direto para o WhatsApp.</p>
+      <div class="card-features">${item.features.map(feature => `<span>${escapeHtml(feature)}</span>`).join('')}</div>
       <div class="modal-actions">
-        <div class="price"><small>${item.priceLabel}</small><strong>${item.price}</strong></div>
-        <button class="btn btn-primary" type="button" data-modal-select="${item.id}">${isSelected(item.id) ? 'Remover da seleção' : 'Adicionar à seleção'}</button>
+        <div class="price"><small>${escapeHtml(item.priceLabel)}</small><strong>${escapeHtml(item.price)}</strong></div>
+        <button class="btn btn-primary" type="button" data-modal-select="${item.id}">${isSelected(item.id) ? 'Remover do pedido' : 'Adicionar ao pedido'}</button>
       </div>
     </div>
   `;
@@ -211,32 +278,74 @@ function showToast(message) {
   showToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
+function buildRequestCode() {
+  const digits = Math.floor(1000000000 + Math.random() * 9000000000);
+  return `BR-${digits}`;
+}
+
+function buildWhatsAppMessage(items) {
+  const subtotal = items.every(item => Number.isFinite(item.priceValue))
+    ? items.reduce((total, item) => total + item.priceValue, 0)
+    : null;
+  const requestCode = buildRequestCode();
+  const serviceType = formFields.serviceType.value || 'Reserva';
+  const formattedDate = formatDateInput(formFields.date.value);
+  const formattedTime = formatTimeInput(formFields.time.value);
+  const customerName = formFields.name.value.trim() || 'A definir';
+  const customerPhone = formFields.phone.value.trim() || 'A definir';
+  const customerAddress = formFields.address.value.trim() || 'A definir';
+  const paymentStatus = formFields.paymentStatus.value || 'Não pago';
+  const paymentMethod = formFields.paymentMethod.value || 'A definir';
+  const notes = formFields.notes.value.trim();
+
+  const productLines = items.flatMap(item => {
+    const priceLabel = item.priceValue === null ? 'Sob consulta' : formatCurrency(item.priceValue);
+    return [
+      `X1 ${item.title} – ${typeLabel(item.type)}  ${priceLabel}`,
+      `    1 Unidade(s)  ${priceLabel}`,
+      ...item.features.map(feature => `    +1 ${feature}`)
+    ];
+  });
+
+  return [
+    `👋 Venho de ${SITE_URL}`,
+    requestCode,
+    `🗓️ ${formattedDate} ⏰ ${formattedTime}`,
+    '',
+    `Tipo de serviço: ${serviceType}`,
+    '',
+    `Nome: ${customerName}`,
+    `Telefone: ${customerPhone}`,
+    `Endereço: ${customerAddress}`,
+    '',
+    '📝 Produtos',
+    ...productLines,
+    '',
+    `Subtotal: ${subtotal === null ? 'A definir' : formatCurrency(subtotal)}`,
+    'Retirada/Entrega: A combinar',
+    `Total: ${subtotal === null ? 'A definir' : formatCurrency(subtotal)}`,
+    '',
+    '💲 Pagamento',
+    `Estado do pagamento: ${paymentStatus}`,
+    `Total a pagar: ${subtotal === null ? 'A definir' : formatCurrency(subtotal)}`,
+    paymentMethod,
+    '',
+    '👆 Por favor, envie-nos esta mensagem agora. Assim que recebermos estaremos atendendo você.'
+  ].join('\n');
+}
+
 function sendToWhatsApp(event) {
   event.preventDefault();
   const items = catalog.filter(item => state.selected.includes(item.id));
+
   if (!items.length) {
     showToast('Selecione pelo menos uma opção antes de enviar.');
     return;
   }
 
-  const date = document.querySelector('#interestDate').value;
-  const people = document.querySelector('#interestPeople').value;
-  const notes = document.querySelector('#interestNotes').value.trim();
-  const formattedDate = date ? new Date(`${date}T12:00:00`).toLocaleDateString('pt-BR') : 'A definir';
-
-  const message = [
-    'Olá! Vim pelo catálogo da Aluga Porto e tenho interesse nas opções abaixo:',
-    '',
-    ...items.map((item, index) => `${index + 1}. *${item.title}*\n   ${item.priceLabel}: ${item.price}`),
-    '',
-    `📅 Data: ${formattedDate}`,
-    `👥 Pessoas: ${people || 'A definir'}`,
-    notes ? `📝 Observação: ${notes}` : '',
-    '',
-    'Podem me informar disponibilidade e valores finais?'
-  ].filter(Boolean).join('\n');
-
+  const message = buildWhatsAppMessage(items);
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  showToast('Pedido pronto para o WhatsApp.');
 }
 
 document.addEventListener('click', event => {
@@ -276,10 +385,10 @@ document.querySelector('#searchButton').addEventListener('click', () => {
 });
 
 document.querySelector('#dateInput').addEventListener('change', event => {
-  document.querySelector('#interestDate').value = event.target.value;
+  formFields.date.value = event.target.value;
 });
 
-document.querySelector('#whatsappForm').addEventListener('submit', sendToWhatsApp);
+whatsappForm.addEventListener('submit', sendToWhatsApp);
 
 document.querySelector('.menu-toggle').addEventListener('click', event => {
   const nav = document.querySelector('.main-nav');

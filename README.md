@@ -5,12 +5,13 @@ Projeto estático em HTML, CSS e JavaScript criado para apresentação ao client
 ## Recursos
 
 - Layout responsivo para celular, tablet e desktop.
-- Catálogo com filtros por categoria e quantidade de pessoas.
+- Catálogo com visual de vitrine em lista, mais próximo de um menu de produtos.
+- Filtros por categoria e quantidade de pessoas.
 - Cards de casas, lanchas e jet skis.
 - Modal de detalhes.
 - Seleção de vários itens com persistência no navegador (`localStorage`).
-- Formulário com data, quantidade de pessoas e observação.
-- Geração automática da mensagem e envio pelo WhatsApp.
+- Painel lateral de pedido com nome, telefone, endereço, serviço, data, hora, pagamento e observação.
+- Geração automática da mensagem e envio pelo WhatsApp no formato combinado.
 - Menu mobile e feedback visual por toast.
 
 ## Executar
@@ -25,11 +26,11 @@ Depois acesse `http://localhost:8000`.
 
 ## Alterar os produtos
 
-Edite o array `catalog` em `assets/js/app.js`.
+Edite o array `catalog` em `assets/js/app.js`. Cada item pode ter preço fixo ou `Sob consulta`.
 
 ## Alterar o WhatsApp
 
-Edite a constante `WHATSAPP_NUMBER` em `assets/js/app.js`.
+Edite as constantes `WHATSAPP_NUMBER` e `SITE_URL` em `assets/js/app.js`.
 
 ## Observação
 
