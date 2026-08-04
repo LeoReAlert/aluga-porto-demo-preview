@@ -33,52 +33,40 @@
   </header>
 
   <main class="catalog-page">
-    <section class="catalog-hero">
-      <div class="container catalog-hero-inner">
-        <div class="catalog-hero-copy">
-          <span class="eyebrow dark">Catálogo de aluguel</span>
-          <h1>Catálogo</h1>
-        </div>
-      </div>
-    </section>
-
-    <section class="catalog-toolbar" aria-label="Busca e filtros">
-      <div class="container search-panel">
-        <label>
-          <span>Categoria</span>
-          <select id="categorySelect">
-            <option value="todos">Todas as opções</option>
-            <option value="casa">Casas de temporada</option>
-            <option value="lancha">Lanchas</option>
-            <option value="jetski">Jet skis</option>
-          </select>
-        </label>
-        <label>
-          <span>Data desejada</span>
-          <input id="dateInput" type="date" />
-        </label>
-        <label>
-          <span>Quantidade de pessoas</span>
-          <select id="peopleSelect">
-            <option value="">Qualquer quantidade</option>
-            <option value="2">Até 2 pessoas</option>
-            <option value="6">Até 6 pessoas</option>
-            <option value="10">Até 10 pessoas</option>
-            <option value="15">Até 15 pessoas</option>
-          </select>
-        </label>
-        <button class="btn btn-dark" id="searchButton" type="button">Buscar</button>
-      </div>
-    </section>
-
     <section class="catalog-section" id="catalogo">
       <div class="container">
-        <div class="section-heading split-heading">
+        <div class="catalog-heading">
           <div>
-            <span class="eyebrow dark">Catálogo Aluga Porto</span>
-            <h2>Aluguéis disponíveis</h2>
+            <span class="eyebrow dark">Catálogo de aluguel</span>
+            <h1>Aluguéis disponíveis</h1>
           </div>
-          <p>Visual pensado para catálogo de aluguel, com destaque na foto, valor e botão de adicionar.</p>
+        </div>
+
+        <div class="search-panel" aria-label="Busca e filtros">
+          <label>
+            <span>Categoria</span>
+            <select id="categorySelect">
+              <option value="todos">Todas as opções</option>
+              <option value="casa">Casas de temporada</option>
+              <option value="lancha">Lanchas</option>
+              <option value="jetski">Jet skis</option>
+            </select>
+          </label>
+          <label>
+            <span>Data desejada</span>
+            <input id="dateInput" type="date" />
+          </label>
+          <label>
+            <span>Quantidade de pessoas</span>
+            <select id="peopleSelect">
+              <option value="">Qualquer quantidade</option>
+              <option value="2">Até 2 pessoas</option>
+              <option value="6">Até 6 pessoas</option>
+              <option value="10">Até 10 pessoas</option>
+              <option value="15">Até 15 pessoas</option>
+            </select>
+          </label>
+          <button class="btn btn-dark" id="searchButton" type="button">Buscar</button>
         </div>
 
         <div class="filters" role="group" aria-label="Filtrar catálogo">

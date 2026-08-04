@@ -555,7 +555,7 @@ function openModal(id) {
     <div class="modal-body">
       <span class="eyebrow dark">${escapeHtml(categoryLabel(getCategory(item)))} • ${escapeHtml(item.location)}</span>
       <h2>${escapeHtml(item.name)}</h2>
-      <p>${escapeHtml(shortDescription(item))} O cartão foi montado para parecer um catálogo de produto, com foco em preço, características e ação rápida para o WhatsApp.</p>
+      <p>${escapeHtml(shortDescription(item))} Consulte disponibilidade, valores e detalhes para fechar a reserva pelo WhatsApp.</p>
       <div class="card-features">${detailChips(item).map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}</div>
       <div class="card-features">${item.amenities.map(chip => `<span>${escapeHtml(chip)}</span>`).join('')}</div>
       <div class="modal-actions">
@@ -624,7 +624,7 @@ function buildWhatsAppMessage(items) {
     `Telefone: ${customerPhone}`,
     `Endereço: ${customerAddress}`,
     '',
-    '📝 Produtos',
+    '📝 Aluguéis selecionados',
     ...productLines,
     '',
     `Subtotal: ${formatMoney(subtotal)}`,
