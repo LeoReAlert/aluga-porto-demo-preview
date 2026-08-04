@@ -673,7 +673,6 @@ document.addEventListener('click', event => {
   const details = event.target.closest('[data-details]');
   const remove = event.target.closest('[data-remove]');
   const modalSelect = event.target.closest('[data-modal-select]');
-  const navAction = event.target.closest('.nav-action');
 
   if (toggle) toggleSelection(String(toggle.dataset.toggle));
   if (details) openModal(String(details.dataset.details));
@@ -685,7 +684,6 @@ document.addEventListener('click', event => {
   if (event.target.closest('[data-open-selection]')) openDrawer();
   if (event.target.closest('[data-close-selection]')) closeDrawer();
   if (event.target.closest('[data-close-modal]')) closeModal();
-  if (navAction) openDrawer();
 });
 
 document.querySelectorAll('.filter').forEach(button => {
@@ -711,18 +709,6 @@ document.querySelector('#dateInput').addEventListener('change', event => {
 });
 
 whatsappForm.addEventListener('submit', sendToWhatsApp);
-
-document.querySelector('.menu-toggle').addEventListener('click', event => {
-  const nav = document.querySelector('.main-nav');
-  nav.classList.toggle('open');
-  event.currentTarget.setAttribute('aria-expanded', String(nav.classList.contains('open')));
-});
-
-document.querySelectorAll('.main-nav a, .main-nav button').forEach(link => {
-  link.addEventListener('click', () => {
-    document.querySelector('.main-nav').classList.remove('open');
-  });
-});
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
