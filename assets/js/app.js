@@ -555,7 +555,7 @@ function toggleSelection(id) {
 }
 
 function updateSelectionUI() {
-  count.textContent = state.selected.length;
+  if (count) count.textContent = state.selected.length;
   const items = catalog.filter(item => state.selected.includes(item.id));
   selectedEmpty.hidden = items.length > 0;
   selectedItems.innerHTML = items.map(item => `
@@ -738,7 +738,6 @@ document.addEventListener('click', event => {
   if (details) openModal(String(details.dataset.details));
   if (remove) toggleSelection(String(remove.dataset.remove));
   if (reserve) sendItemToWhatsApp(String(reserve.dataset.reserve));
-  if (event.target.closest('[data-open-selection]')) openDrawer();
   if (event.target.closest('[data-close-selection]')) closeDrawer();
   if (event.target.closest('[data-close-modal]')) closeModal();
 });
