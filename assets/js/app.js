@@ -1,8 +1,6 @@
 const SITE_URL = 'https://alugaporto.com.br';
 const WHATSAPP_NUMBER = '5567999439167';
 const MESSAGE_SEPARATOR = '------------------------';
-const EMOJI_OK = String.fromCodePoint(0x2705);
-const EMOJI_RENTAL = String.fromCodePoint(0x1F6A4);
 const CURRENCY = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL'
@@ -411,14 +409,6 @@ function categoryLabel(category) {
   }[category] || category;
 }
 
-function categoryIcon(category) {
-  return {
-    casa: EMOJI_RENTAL,
-    lancha: EMOJI_RENTAL,
-    jetski: EMOJI_RENTAL
-  }[category] || EMOJI_OK;
-}
-
 function isSelected(id) {
   return state.selected.includes(id);
 }
@@ -648,7 +638,7 @@ function buildWhatsAppMessage(items, options = {}) {
     const category = getCategory(item);
     const priceLine = `${formatMoney(item.price)} ${normalizePeriod(item.period)}`;
     return [
-      `${categoryIcon(category)} *${item.name}*`,
+      `>> *${item.name}*`,
       `Categoria: ${categoryLabel(category)}`,
       `Local/regiao: ${item.location}`,
       ...whatsAppDescription(item),
@@ -674,7 +664,7 @@ function buildWhatsAppMessage(items, options = {}) {
   ];
 
   return [
-    `${EMOJI_OK} Ola! Vim pelo catalogo da Aluga Porto`,
+    'Ola! Vim pelo catalogo da Aluga Porto',
     `Site: ${SITE_URL}`,
     `Pedido: ${requestCode}`,
     MESSAGE_SEPARATOR,
