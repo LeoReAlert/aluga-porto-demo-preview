@@ -183,35 +183,12 @@ img { max-width: 100%; display: block; }
   gap: 0;
 }
 .catalog-hero-copy h1 {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.25rem, 4vw, 3.35rem);
+  font-size: clamp(2.6rem, 5vw, 4rem);
   line-height: 1;
   letter-spacing: -.03em;
   max-width: 9ch;
-}
-.catalog-hero-note {
-  min-width: 220px;
-  max-width: 250px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(255,255,255,.8);
-  border: 1px solid rgba(223,229,231,.9);
-  box-shadow: 0 16px 36px rgba(7,31,50,.08);
-}
-.catalog-hero-note strong,
-.catalog-hero-note span {
-  display: block;
-}
-.catalog-hero-note strong {
-  font-size: .88rem;
-  color: var(--navy);
-}
-.catalog-hero-note span {
-  margin-top: 6px;
-  color: var(--muted);
-  line-height: 1.45;
-  font-size: .84rem;
 }
 .catalog-hero-copy p { display: none; }
 .catalog-toolbar { padding: 0 0 14px; }
@@ -579,7 +556,7 @@ img { max-width: 100%; display: block; }
   .main-nav { top: 72px; left: 10px; right: 10px; }
   .catalog-page { padding-top: 62px; padding-bottom: 32px; }
   .catalog-hero { padding-top: 0; }
-  .catalog-hero-copy h1 { max-width: 10ch; font-size: 2.15rem; }
+  .catalog-hero-copy h1 { max-width: 10ch; font-size: 2.35rem; }
   .hero { min-height: auto; padding-bottom: 34px; background-position: 66% center; }
   .hero-content { padding-top: 108px; padding-bottom: 42px; }
   .hero-overlay { background: linear-gradient(180deg, rgba(4,23,36,.88) 0%, rgba(4,23,36,.58) 100%); }
