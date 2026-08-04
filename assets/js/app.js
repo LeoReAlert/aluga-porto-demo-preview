@@ -1,6 +1,8 @@
 const SITE_URL = 'https://alugaporto.com.br';
 const WHATSAPP_NUMBER = '5567999439167';
 const MESSAGE_SEPARATOR = '------------------------';
+const EMOJI_OK = String.fromCodePoint(0x2705);
+const EMOJI_RENTAL = String.fromCodePoint(0x1F6A4);
 const CURRENCY = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL'
@@ -411,10 +413,10 @@ function categoryLabel(category) {
 
 function categoryIcon(category) {
   return {
-    casa: '🏠',
-    lancha: '🚤',
-    jetski: '🚤'
-  }[category] || '✅';
+    casa: EMOJI_RENTAL,
+    lancha: EMOJI_RENTAL,
+    jetski: EMOJI_RENTAL
+  }[category] || EMOJI_OK;
 }
 
 function isSelected(id) {
@@ -672,7 +674,7 @@ function buildWhatsAppMessage(items, options = {}) {
   ];
 
   return [
-    '✅ Ola! Vim pelo catalogo da Aluga Porto',
+    `${EMOJI_OK} Ola! Vim pelo catalogo da Aluga Porto`,
     `Site: ${SITE_URL}`,
     `Pedido: ${requestCode}`,
     MESSAGE_SEPARATOR,
