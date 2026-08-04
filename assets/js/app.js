@@ -353,6 +353,7 @@ document.addEventListener('click', event => {
   const details = event.target.closest('[data-details]');
   const remove = event.target.closest('[data-remove]');
   const modalSelect = event.target.closest('[data-modal-select]');
+  const navAction = event.target.closest('.nav-action');
 
   if (toggle) toggleSelection(Number(toggle.dataset.toggle));
   if (details) openModal(Number(details.dataset.details));
@@ -364,6 +365,7 @@ document.addEventListener('click', event => {
   if (event.target.closest('[data-open-selection]')) openDrawer();
   if (event.target.closest('[data-close-selection]')) closeDrawer();
   if (event.target.closest('[data-close-modal]')) closeModal();
+  if (navAction) openDrawer();
 });
 
 document.querySelectorAll('.filter').forEach(button => {
@@ -397,6 +399,10 @@ document.querySelector('.menu-toggle').addEventListener('click', event => {
 });
 
 document.querySelectorAll('.main-nav a').forEach(link => link.addEventListener('click', () => {
+  document.querySelector('.main-nav').classList.remove('open');
+}));
+
+document.querySelectorAll('.main-nav button').forEach(button => button.addEventListener('click', () => {
   document.querySelector('.main-nav').classList.remove('open');
 }));
 

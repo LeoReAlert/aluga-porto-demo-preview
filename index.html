@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Catálogo online Aluga Porto — casas, lanchas e jet skis em Porto Rico, PR." />
-  <title>Aluga Porto | Catálogo de aluguel</title>
+  <title>Aluga Porto | Catálogo de produtos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -22,9 +22,7 @@
 
       <nav class="main-nav" aria-label="Navegação principal">
         <a href="#catalogo">Catálogo</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#vantagens">Vantagens</a>
-        <a href="#contato">Contato</a>
+        <button type="button" class="nav-action" data-open-selection>Pedido</button>
       </nav>
 
       <button class="selection-button" type="button" data-open-selection>
@@ -34,29 +32,25 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
-        <span class="eyebrow">Catálogo de aluguel em Porto Rico</span>
-        <h1>Escolha o item, monte o pedido e envie no WhatsApp.</h1>
-        <p>Casas, lanchas e jet skis organizados como catálogo. Selecione uma ou mais opções, preencha os dados e gere uma mensagem pronta para atendimento.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
-          <a class="btn btn-ghost" href="https://wa.me/5544991416218" target="_blank" rel="noopener">Abrir WhatsApp</a>
+  <main class="catalog-page">
+    <section class="catalog-hero">
+      <div class="container catalog-hero-inner">
+        <div class="catalog-hero-copy">
+          <span class="eyebrow dark">Catálogo de produtos</span>
+          <h1>Escolha os itens e monte o pedido no WhatsApp.</h1>
+          <p>Formato de vitrine, direto ao ponto, com os produtos que o cliente pode alugar e o pedido montado na lateral.</p>
         </div>
-        <div class="hero-stats">
-          <div><strong>Catálogo rápido</strong><span>Visual de vitrine com cards diretos</span></div>
-          <div><strong>3 categorias</strong><span>Casas, lanchas e jet skis</span></div>
-          <div><strong>Pedido pronto</strong><span>Mensagem formatada automaticamente</span></div>
+        <div class="catalog-hero-note">
+          <strong>Venda rápida</strong>
+          <span>Seleção simples, visual limpo e mensagem pronta para envio.</span>
         </div>
       </div>
     </section>
 
-    <section class="quick-search" aria-label="Busca rápida">
+    <section class="catalog-toolbar" aria-label="Busca e filtros">
       <div class="container search-panel">
         <label>
-          <span>O que você procura?</span>
+          <span>Categoria</span>
           <select id="categorySelect">
             <option value="todos">Todas as opções</option>
             <option value="casa">Casas de temporada</option>
@@ -78,18 +72,18 @@
             <option value="15">Até 15 pessoas</option>
           </select>
         </label>
-        <button class="btn btn-dark" id="searchButton" type="button">Buscar opções</button>
+        <button class="btn btn-dark" id="searchButton" type="button">Buscar</button>
       </div>
     </section>
 
-    <section class="section catalog-section" id="catalogo">
+    <section class="catalog-section" id="catalogo">
       <div class="container">
         <div class="section-heading split-heading">
           <div>
             <span class="eyebrow dark">Catálogo Aluga Porto</span>
-            <h2>Escolha o item que o cliente quer alugar</h2>
+            <h2>Produtos disponíveis</h2>
           </div>
-          <p>Formato pensado como catálogo de produto, com imagem, detalhes rápidos e botão para adicionar ao pedido. O conteúdo continua fácil de trocar no array do JavaScript.</p>
+          <p>Visual pensado para catálogo de produtos, com destaque na foto, preço e botão de adicionar.</p>
         </div>
 
         <div class="filters" role="group" aria-label="Filtrar catálogo">
@@ -103,61 +97,7 @@
         <p class="empty-state" id="emptyState" hidden>Nenhuma opção encontrada para esses filtros.</p>
       </div>
     </section>
-
-    <section class="section steps-section" id="como-funciona">
-      <div class="container">
-        <div class="section-heading centered">
-          <span class="eyebrow dark">Simples e rápido</span>
-          <h2>Da escolha ao WhatsApp em poucos passos</h2>
-        </div>
-        <div class="steps-grid">
-          <article><span>01</span><h3>Veja os itens</h3><p>Os produtos aparecem como vitrine, com foto, preço e informações principais.</p></article>
-          <article><span>02</span><h3>Adicione ao pedido</h3><p>Toque no botão de mais para montar a seleção do cliente.</p></article>
-          <article><span>03</span><h3>Preencha os dados</h3><p>Nome, telefone, endereço e informações do pedido entram no painel lateral.</p></article>
-          <article><span>04</span><h3>Enviar no WhatsApp</h3><p>A mensagem sai pronta no formato combinado com o cliente.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section benefits-section" id="vantagens">
-      <div class="container benefits-wrap">
-        <div class="benefit-image"></div>
-        <div class="benefit-content">
-          <span class="eyebrow">Por que escolher a Aluga Porto?</span>
-          <h2>Mais segurança e praticidade para aproveitar Porto Rico.</h2>
-          <div class="benefit-list">
-            <div><span>✓</span><p><strong>Seleção verificada</strong>Opções escolhidas com foco em conforto, qualidade e boa experiência.</p></div>
-            <div><span>✓</span><p><strong>Preços transparentes</strong>Informações claras antes de iniciar o atendimento.</p></div>
-            <div><span>✓</span><p><strong>Suporte dedicado</strong>Atendimento antes, durante e depois da reserva.</p></div>
-            <div><span>✓</span><p><strong>Contato direto</strong>Negociação simples e rápida pelo WhatsApp.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta-section" id="contato">
-      <div class="container cta-box">
-        <div>
-          <span class="eyebrow">Atendimento personalizado</span>
-          <h2>Não encontrou o item ideal?</h2>
-          <p>Conte o que o cliente procura e a equipe pode ajustar o catálogo com os itens reais do aluguel.</p>
-        </div>
-        <a class="btn btn-light" href="https://wa.me/5544991416218?text=Olá!%20Vim%20pelo%20catálogo%20da%20Aluga%20Porto." target="_blank" rel="noopener">Chamar no WhatsApp</a>
-      </div>
-    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="brand footer-brand" href="#inicio"><span class="brand-mark">AP</span><span><strong>Aluga Porto</strong><small>Experiências em Porto Rico</small></span></a>
-        <p>Casas de temporada, lanchas e jet skis organizados em formato de catálogo para o cliente selecionar e pedir pelo WhatsApp.</p>
-      </div>
-      <div><h3>Navegação</h3><a href="#catalogo">Catálogo</a><a href="#como-funciona">Como funciona</a><a href="#vantagens">Vantagens</a></div>
-      <div><h3>Contato</h3><a href="tel:+5544991416218">(44) 99141-6218</a><a href="mailto:contato@alugaporto.com.br">contato@alugaporto.com.br</a><span>Porto Rico - PR</span></div>
-    </div>
-    <div class="container footer-bottom"><span>© 2026 Aluga Porto. Projeto demonstrativo.</span><span>Catálogo digital integrado ao WhatsApp.</span></div>
-  </footer>
 
   <aside class="selection-drawer" id="selectionDrawer" aria-hidden="true">
     <div class="drawer-backdrop" data-close-selection></div>
