@@ -1,5 +1,5 @@
 const SITE_URL = 'https://alugaporto.com.br';
-const WHATSAPP_NUMBER = '5544991416218';
+const WHATSAPP_NUMBER = '5567999439167';
 const CURRENCY = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL'
