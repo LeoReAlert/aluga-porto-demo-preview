@@ -1,5 +1,6 @@
 const SITE_URL = 'https://alugaporto.com.br';
 const WHATSAPP_NUMBER = '5567999439167';
+const MESSAGE_SEPARATOR = '------------------------';
 const CURRENCY = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL'
@@ -410,10 +411,10 @@ function categoryLabel(category) {
 
 function categoryIcon(category) {
   return {
-    casa: '🏡',
-    lancha: '🛥️',
-    jetski: '🌊'
-  }[category] || '✨';
+    casa: '🏠',
+    lancha: '🚤',
+    jetski: '🚤'
+  }[category] || '✅';
 }
 
 function isSelected(id) {
@@ -438,21 +439,21 @@ function whatsAppDescription(item) {
 
   if (category === 'casa') {
     return [
-      `📝 Descrição: casa de temporada em ${item.location}, ideal para família e amigos.`,
-      item.details.quartos ? `🛏️ Quartos: ${item.details.quartos}` : '',
-      item.details.suites ? `🚿 Suítes: ${item.details.suites}` : '',
-      item.details.banheiros ? `🚽 Banheiros: ${item.details.banheiros}` : '',
-      item.details.pessoas ? `👥 Capacidade: até ${item.details.pessoas} pessoas` : '',
-      amenities ? `✨ Destaques: ${amenities}` : ''
+      `Descricao: casa de temporada em ${item.location}, ideal para familia e amigos.`,
+      item.details.quartos ? `Quartos: ${item.details.quartos}` : '',
+      item.details.suites ? `Suites: ${item.details.suites}` : '',
+      item.details.banheiros ? `Banheiros: ${item.details.banheiros}` : '',
+      item.details.pessoas ? `Capacidade: ate ${item.details.pessoas} pessoas` : '',
+      amenities ? `Destaques: ${amenities}` : ''
     ].filter(Boolean);
   }
 
   return [
-    `📝 Descrição: ${item.details.modelo || item.name} disponível para passeio em ${item.location}.`,
-    item.details.modelo ? `⚓ Modelo: ${item.details.modelo}` : '',
-    item.details.motor ? `🚤 Motor: ${item.details.motor}` : '',
-    item.details.pessoas ? `👥 Capacidade: até ${item.details.pessoas} pessoas` : '',
-    amenities ? `✨ Incluso/estrutura: ${amenities}` : ''
+    `Descricao: ${item.details.modelo || item.name} disponivel para passeio em ${item.location}.`,
+    item.details.modelo ? `Modelo: ${item.details.modelo}` : '',
+    item.details.motor ? `Motor: ${item.details.motor}` : '',
+    item.details.pessoas ? `Capacidade: ate ${item.details.pessoas} pessoas` : '',
+    amenities ? `Incluso/estrutura: ${amenities}` : ''
   ].filter(Boolean);
 }
 
@@ -646,52 +647,57 @@ function buildWhatsAppMessage(items, options = {}) {
     const priceLine = `${formatMoney(item.price)} ${normalizePeriod(item.period)}`;
     return [
       `${categoryIcon(category)} *${item.name}*`,
-      `📂 Categoria: ${categoryLabel(category)}`,
-      `📍 Local/região: ${item.location}`,
+      `Categoria: ${categoryLabel(category)}`,
+      `Local/regiao: ${item.location}`,
       ...whatsAppDescription(item),
-      `💵 Valor base: ${priceLine}`,
-      `🔢 Quantidade: 1 unidade`
+      `Valor base: ${priceLine}`,
+      `Quantidade: 1 unidade`
     ];
   });
   const customerLines = options.includeCustomer === false ? [] : [
+    MESSAGE_SEPARATOR,
+    'CLIENTE',
     '',
-    '🙋 *Cliente*',
-    `👤 Nome: ${customerName}`,
-    `📞 Telefone: ${customerPhone}`,
-    `📍 Endereço / referência: ${customerAddress}`
+    `Nome: ${customerName}`,
+    `Telefone: ${customerPhone}`,
+    `Endereco / referencia: ${customerAddress}`
   ];
   const paymentLines = options.includePayment === false ? [] : [
+    MESSAGE_SEPARATOR,
+    'PAGAMENTO',
     '',
-    '💳 *Pagamento*',
-    `📌 Estado do pagamento: ${paymentStatus}`,
-    `💰 Total a pagar: ${formatMoney(total)}`,
-    `💳 Forma de pagamento: ${paymentMethod}`
+    `Estado do pagamento: ${paymentStatus}`,
+    `Total a pagar: ${formatMoney(total)}`,
+    `Forma de pagamento: ${paymentMethod}`
   ];
 
   return [
-    '👋 Olá! Vim pelo catálogo da Aluga Porto',
-    `🔗 ${SITE_URL}`,
-    `🧾 Pedido: ${requestCode}`,
+    '✅ Ola! Vim pelo catalogo da Aluga Porto',
+    `Site: ${SITE_URL}`,
+    `Pedido: ${requestCode}`,
+    MESSAGE_SEPARATOR,
+    'RESERVA DESEJADA',
     '',
-    '📅 *Reserva desejada*',
-    `🏷️ Tipo: ${serviceType}`,
-    `🗓️ Data: ${formattedDate}`,
-    `⏰ Horário: ${formattedTime}`,
-    `🌴 Período: ${dayLabel}`,
+    `Tipo: ${serviceType}`,
+    `Data: ${formattedDate}`,
+    `Horario: ${formattedTime}`,
+    `Periodo: ${dayLabel}`,
     ...customerLines,
+    MESSAGE_SEPARATOR,
+    'ALUGUEL SELECIONADO',
     '',
-    '📦 *Aluguel selecionado*',
     ...rentalLines,
+    MESSAGE_SEPARATOR,
+    'RESUMO DE VALORES',
     '',
-    '💰 *Resumo de valores*',
-    `💸 Subtotal base: ${formatMoney(subtotal)}`,
-    `📆 Dias de locação: ${dayLabel}`,
-    `✅ Total estimado: ${formatMoney(total)}`,
+    `Subtotal base: ${formatMoney(subtotal)}`,
+    `Dias de locacao: ${dayLabel}`,
+    `Total estimado: ${formatMoney(total)}`,
     ...paymentLines,
-    notes ? `📝 *Observação:* ${notes}` : '',
-    '',
-    '✅ Pode verificar a disponibilidade pra mim?',
-    '📲 Aguardo o retorno, obrigado!'
+    notes ? `${MESSAGE_SEPARATOR}\nOBSERVACAO\n\n${notes}` : '',
+    MESSAGE_SEPARATOR,
+    'Pode verificar a disponibilidade pra mim?',
+    'Aguardo o retorno, obrigado!'
   ].filter(Boolean).join('\n');
 }
 
