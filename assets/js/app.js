@@ -472,7 +472,7 @@ function renderCard(item) {
           </div>
           <div class="card-actions">
             <button class="details-button" type="button" data-details="${escapeHtml(item.id)}">Detalhes</button>
-            <button class="card-favorite ${isSelected(item.id) ? 'selected' : ''}" type="button" data-toggle="${escapeHtml(item.id)}" aria-label="${isSelected(item.id) ? `Remover ${item.name} do pedido` : `Adicionar ${item.name} ao pedido`}">${isSelected(item.id) ? '−' : '+'}</button>
+            <button class="reserve-button" type="button" data-reserve="${escapeHtml(item.id)}">Reservar</button>
           </div>
         </div>
       </div>
@@ -564,7 +564,7 @@ function openModal(id) {
           <small>${escapeHtml(normalizePeriod(item.period) || 'A partir de')}</small>
           <strong>${formatMoney(item.price)}</strong>
         </div>
-        <button class="btn btn-primary" type="button" data-modal-select="${escapeHtml(item.id)}">${isSelected(item.id) ? 'Remover do pedido' : 'Adicionar ao pedido'}</button>
+        <button class="btn btn-primary" type="button" data-reserve="${escapeHtml(item.id)}">Reservar no WhatsApp</button>
       </div>
     </div>
   `;
@@ -592,14 +592,15 @@ function buildRequestCode() {
   return `BR-${digits}`;
 }
 
-function buildWhatsAppMessage(items) {
+function buildWhatsAppMessage(items, options = {}) {
   const subtotal = items.reduce((total, item) => total + Number(item.price || 0), 0);
   const rentalDays = Number(formFields.days.value || 1);
   const total = subtotal * rentalDays;
   const dayLabel = rentalDays === 1 ? '1 dia' : `${rentalDays} dias`;
   const requestCode = buildRequestCode();
   const serviceType = formFields.serviceType.value || 'Reserva';
-  const formattedDate = formFields.date.value ? new Date(`${formFields.date.value}T12:00:00`).toLocaleDateString('pt-BR') : 'A definir';
+  const selectedDate = document.querySelector('#dateInput').value || formFields.date.value;
+  const formattedDate = selectedDate ? new Date(`${selectedDate}T12:00:00`).toLocaleDateString('pt-BR') : 'A definir';
   const formattedTime = formFields.time.value || 'A definir';
   const customerName = formFields.name.value.trim() || 'A definir';
   const customerPhone = formFields.phone.value.trim() || 'A definir';
@@ -618,6 +619,20 @@ function buildWhatsAppMessage(items) {
       ...detailChips(item).map(chip => `   ✨ ${chip}`)
     ];
   });
+  const customerLines = options.includeCustomer === false ? [] : [
+    '',
+    '🙋 *Cliente*',
+    `• Nome: ${customerName}`,
+    `• Telefone: ${customerPhone}`,
+    `• Endereço / referência: ${customerAddress}`
+  ];
+  const paymentLines = options.includePayment === false ? [] : [
+    '',
+    '💳 *Pagamento*',
+    `• Estado do pagamento: ${paymentStatus}`,
+    `• Total a pagar: ${formatMoney(total)}`,
+    `• Forma de pagamento: ${paymentMethod}`
+  ];
 
   return [
     '👋 Olá, vim pelo catálogo Aluga Porto',
@@ -629,11 +644,7 @@ function buildWhatsAppMessage(items) {
     `• Data desejada: ${formattedDate}`,
     `• Horário: ${formattedTime}`,
     `• Período: ${dayLabel}`,
-    '',
-    '🙋 *Cliente*',
-    `• Nome: ${customerName}`,
-    `• Telefone: ${customerPhone}`,
-    `• Endereço / referência: ${customerAddress}`,
+    ...customerLines,
     '',
     '🛥️ *Aluguéis selecionados*',
     ...productLines,
@@ -642,11 +653,7 @@ function buildWhatsAppMessage(items) {
     `• Subtotal base: ${formatMoney(subtotal)}`,
     `• Quantidade de dias: ${dayLabel}`,
     `• Total estimado: ${formatMoney(total)}`,
-    '',
-    '💳 *Pagamento*',
-    `• Estado do pagamento: ${paymentStatus}`,
-    `• Total a pagar: ${formatMoney(total)}`,
-    `• Forma de pagamento: ${paymentMethod}`,
+    ...paymentLines,
     notes ? `📝 *Observação:* ${notes}` : '',
     '',
     '✅ Pode verificar a disponibilidade pra mim?',
@@ -668,19 +675,27 @@ function sendToWhatsApp(event) {
   showToast('Pedido pronto para o WhatsApp.');
 }
 
+function sendItemToWhatsApp(id) {
+  const item = catalog.find(catalogItem => catalogItem.id === id);
+  if (!item) return;
+
+  const message = buildWhatsAppMessage([item], {
+    includeCustomer: false,
+    includePayment: false
+  });
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  closeModal();
+  showToast('Reserva aberta no WhatsApp.');
+}
+
 document.addEventListener('click', event => {
-  const toggle = event.target.closest('[data-toggle]');
   const details = event.target.closest('[data-details]');
   const remove = event.target.closest('[data-remove]');
-  const modalSelect = event.target.closest('[data-modal-select]');
+  const reserve = event.target.closest('[data-reserve]');
 
-  if (toggle) toggleSelection(String(toggle.dataset.toggle));
   if (details) openModal(String(details.dataset.details));
   if (remove) toggleSelection(String(remove.dataset.remove));
-  if (modalSelect) {
-    toggleSelection(String(modalSelect.dataset.modalSelect));
-    openModal(String(modalSelect.dataset.modalSelect));
-  }
+  if (reserve) sendItemToWhatsApp(String(reserve.dataset.reserve));
   if (event.target.closest('[data-open-selection]')) openDrawer();
   if (event.target.closest('[data-close-selection]')) closeDrawer();
   if (event.target.closest('[data-close-modal]')) closeModal();
