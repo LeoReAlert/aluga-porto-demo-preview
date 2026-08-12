@@ -35,7 +35,7 @@ button, input, select, textarea { font: inherit; }
 button { cursor: pointer; }
 img { max-width: 100%; display: block; }
 .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-.catalog-page { padding-top: 70px; padding-bottom: 40px; }
+.catalog-page { padding-top: 84px; padding-bottom: 40px; }
 
 .site-header {
   position: fixed;
@@ -49,9 +49,15 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid rgba(0, 87, 217, .2);
   box-shadow: 0 10px 28px rgba(7, 31, 50, .08);
 }
-.nav-wrap { min-height: 70px; display: flex; align-items: center; gap: 32px; }
+.nav-wrap { min-height: 84px; display: flex; align-items: center; gap: 32px; }
 .brand { display: inline-flex; align-items: center; gap: 14px; min-width: max-content; }
-.brand-logo { width: 156px; height: auto; display: block; }
+.brand-logo {
+  width: 220px;
+  height: 72px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+}
 .brand-copy { display: flex; flex-direction: column; }
 .brand strong, .brand small { display: block; }
 .brand strong {
@@ -160,13 +166,18 @@ img { max-width: 100%; display: block; }
 }
 .search-panel {
   display: grid;
-  grid-template-columns: 1.05fr .85fr 1fr .75fr .65fr;
+  grid-template-columns: 1.05fr .85fr 1fr .75fr 136px;
   gap: 12px;
   padding: 14px;
   border-radius: 22px;
   background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(244,248,255,.9));
   border: 1px solid rgba(0,87,217,.14);
   box-shadow: 0 18px 44px rgba(7, 31, 50, .08);
+}
+.search-panel .btn {
+  align-self: end;
+  min-height: 48px;
+  border-radius: 10px;
 }
 .search-panel label, .interest-form label { display: flex; flex-direction: column; gap: 8px; }
 .search-panel label span, .interest-form label span {
@@ -551,11 +562,11 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 700px) {
   .container { width: min(100% - 20px, 1180px); }
-  .nav-wrap { min-height: 72px; gap: 10px; flex-wrap: wrap; }
+  .nav-wrap { min-height: 80px; gap: 10px; flex-wrap: wrap; }
   .brand { flex: 1 1 auto; min-width: 0; }
   .brand small { display: none; }
-  .brand-logo { width: 132px; flex: 0 0 auto; }
-  .catalog-page { padding-top: 72px; padding-bottom: 32px; }
+  .brand-logo { width: 170px; height: 62px; flex: 0 0 auto; }
+  .catalog-page { padding-top: 80px; padding-bottom: 32px; }
   .catalog-section { padding: 20px 0 40px; }
   .catalog-heading { margin-bottom: 14px; }
   .catalog-heading h1 { font-size: 2.35rem; }
