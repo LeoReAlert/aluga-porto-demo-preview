@@ -1,4 +1,4 @@
-# Aluga Porto — Catálogo demonstrativo
+# Kauan Jetss — Catálogo demonstrativo
 
 Projeto estático em HTML, CSS e JavaScript criado para apresentação ao cliente.
 

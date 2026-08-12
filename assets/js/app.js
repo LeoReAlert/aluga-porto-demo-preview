@@ -664,7 +664,7 @@ function buildWhatsAppMessage(items, options = {}) {
   ];
 
   return [
-    'Ola! Vim pelo catalogo da Aluga Porto',
+    'Ola! Vim pelo catalogo da Kauan Jetss',
     `Site: ${SITE_URL}`,
     `Pedido: ${requestCode}`,
     MESSAGE_SEPARATOR,

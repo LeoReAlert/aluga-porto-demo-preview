@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Kauan Jetss favicon</title>
+  <desc id="desc">Marca compacta com jet ski estilizado e letras KJ.</desc>
+  <defs>
+    <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DCE7F4"/>
+    </linearGradient>
+  </defs>
+  <path d="M91 213c47-74 155-121 268-121 74 0 143 20 197 55" fill="none" stroke="url(#fg)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M104 224c53-62 142-100 240-100 70 0 131 16 180 44" fill="none" stroke="#FFDF00" stroke-width="8" stroke-linecap="round"/>
+  <path d="M163 351c58-6 114-6 167 0 28 3 58 9 90 19" fill="none" stroke="url(#fg)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M157 336l52-122h52l-20 49h44l-17 41h-44l-14 32z" fill="url(#fg)"/>
+  <path d="M290 337l42-98h94l-12 29h-58l-6 14h54l-12 28h-54l-16 27z" fill="url(#fg)"/>
+  <path d="M128 350h36l17-39h35l-17 39h36l-56 92h-54l31-53h-31z" fill="url(#fg)"/>
+  <path d="M291 350h40l-18 40h39l-48 92h-52l20-37h-34l-20 37h-52l47-92h54z" fill="url(#fg)"/>
+  <path d="M187 246c52-26 126-32 199-19" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity=".72"/>
+</svg>
