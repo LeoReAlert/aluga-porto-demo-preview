@@ -1,5 +1,5 @@
 const SITE_URL = 'https://alugaporto.com.br';
-const WHATSAPP_NUMBER = '5567999439167';
+const WHATSAPP_NUMBER = '5543991412161';
 const MESSAGE_SEPARATOR = '------------------------';
 const CURRENCY = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -7,30 +7,6 @@ const CURRENCY = new Intl.NumberFormat('pt-BR', {
 });
 
 const catalog = [
-  {
-    "id": "Casa Madrid",
-    "name": "Casa Madrid",
-    "type": "casa",
-    "price": 990,
-    "period": "/noite",
-    "badge": "Novo",
-    "location": "Madrid",
-    "details": { "suites": 3, "quartos": 3, "banheiros": 1, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
-    "image": "casas/Casa Madrid/1.jpeg"
-  },
-  {
-    "id": "Casa10",
-    "name": "Casa Portal 2",
-    "type": "casa",
-    "price": 1250,
-    "period": "/noite",
-    "badge": "Destaque",
-    "location": "Jardin Portal",
-    "details": { "suites": 3, "quartos": 4, "banheiros": 4, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Garagem 3 Carros", "Mesa de Sinuca", "Som", "Lavanderia"],
-    "image": "casas/Casa10/1.jpeg"
-  },
   {
     "id": "Catamara Aurora 750",
     "name": "Catamarã Aurora 750",
@@ -92,18 +68,6 @@ const catalog = [
     "image": "casas/Gti 170 SE/1.jpeg"
   },
   {
-    "id": "Lancha FS 230",
-    "name": "FS 230",
-    "type": "embarcacao",
-    "price": 2900,
-    "period": "/Dia)",
-    "badge": "Novo",
-    "location": "Marina",
-    "details": { "pessoas": 9, "motor": "250 hp", "modelo": "FS 230" },
-    "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
-    "image": "casas/Lancha FS 230/1.jpeg"
-  },
-  {
     "id": "Lancha Focker 188",
     "name": "Lancha Focker 188",
     "type": "embarcacao",
@@ -126,18 +90,6 @@ const catalog = [
     "details": { "pessoas": 13, "motor": "300 hp", "modelo": "Focker 272" },
     "amenities": ["Coletes Salva-vidas", "Som bluetooth", "2 Guarda Sol"],
     "image": "casas/Lancha Focker 272/1.webp"
-  },
-  {
-    "id": "Lancha Naja 195",
-    "name": "Lancha Naja 195",
-    "type": "embarcacao",
-    "price": 2000,
-    "period": "/Dia)",
-    "badge": "Novo",
-    "location": "Marina Aluga Porto",
-    "details": { "pessoas": 7, "motor": "135 hp", "modelo": "Lancha Naja 195" },
-    "amenities": ["Guia Experiente", "Guarda-Sol", "Coletes Salva Vidas", "Pia", "Churrasqueira", "Som"],
-    "image": "casas/Lancha Naja 195/1.jpeg"
   },
   {
     "id": "Lancha Nhd 270",
@@ -164,18 +116,6 @@ const catalog = [
     "image": "casas/Mestra 210/1.webp"
   },
   {
-    "id": "Mestra 222",
-    "name": "Lancha Mestra 222",
-    "type": "embarcacao",
-    "price": 3500,
-    "period": "/Dia",
-    "badge": "Novo",
-    "location": "Aluga Porto",
-    "details": { "pessoas": 11, "motor": "200 hp", "modelo": "Mestra 222" },
-    "amenities": ["Coletes Salva-vidas", "Som bluetooth", "Churrasqueira"],
-    "image": "casas/Mestra 222/1.jpeg"
-  },
-  {
     "id": "NX 280",
     "name": "Nx 280",
     "type": "embarcacao",
@@ -186,18 +126,6 @@ const catalog = [
     "details": { "pessoas": 13, "motor": "300 hp", "modelo": "Nx 280" },
     "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
     "image": "casas/NX 280/1.jpeg"
-  },
-  {
-    "id": "Phoenix 270",
-    "name": "Phoenix 270",
-    "type": "embarcacao",
-    "price": 3500,
-    "period": "/Dia)",
-    "badge": "Novo",
-    "location": "Marina",
-    "details": { "pessoas": 10, "motor": "300 hp", "modelo": "Phoenix 270" },
-    "amenities": ["Guia Experiente", "Colete Salva Vidas", "Banheiro Privativo"],
-    "image": "casas/Phoenix 270/1.jpeg"
   },
   {
     "id": "Wake 230 Pro",
@@ -212,54 +140,6 @@ const catalog = [
     "image": "casas/Wake 230 Pro/1.jpeg"
   },
   {
-    "id": "casa1",
-    "name": "Casa Luxo Grécia",
-    "type": "casa",
-    "price": 990,
-    "period": "/noite",
-    "badge": "Destaque",
-    "location": "Jardin Grécia",
-    "details": { "suites": 3, "quartos": 3, "banheiros": 4, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Tvs nos Quartos", "Lavanderia"],
-    "image": "casas/casa1/1.webp"
-  },
-  {
-    "id": "casa11",
-    "name": "Casa Riviera 5",
-    "type": "casa",
-    "price": 1350,
-    "period": "/noite",
-    "badge": "Destaque",
-    "location": "Jardin Riviera",
-    "details": { "suites": 1, "quartos": 3, "banheiros": 3, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Cervejeira", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Lavanderia"],
-    "image": "casas/casa11/1.webp"
-  },
-  {
-    "id": "casa12",
-    "name": "Casa Riviera 6",
-    "type": "casa",
-    "price": 1150,
-    "period": "/noite",
-    "badge": "Destaque",
-    "location": "Jardin Riviera",
-    "details": { "suites": 1, "quartos": 3, "banheiros": 3, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Lavanderia"],
-    "image": "casas/casa12/1.webp"
-  },
-  {
-    "id": "casa13",
-    "name": "Casa Bela Vista 3",
-    "type": "casa",
-    "price": 1250,
-    "period": "/noite",
-    "badge": "Destaque",
-    "location": "Bela Vista",
-    "details": { "suites": 3, "quartos": 3, "banheiros": 4, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Eletrodomesticos", "Banheiro social", "Tvs nos Quartos", "Lavanderia"],
-    "image": "casas/casa13/1.webp"
-  },
-  {
     "id": "casa2",
     "name": "Casa Riviera",
     "type": "casa",
@@ -270,18 +150,6 @@ const catalog = [
     "details": { "suites": 2, "quartos": 4, "banheiros": 4, "pessoas": 14 },
     "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
     "image": "casas/casa2/1.webp"
-  },
-  {
-    "id": "casa4",
-    "name": "Casa Riviera 2",
-    "type": "casa",
-    "price": 1100,
-    "period": "/noite",
-    "badge": "Novidade",
-    "location": "Jardin Portal",
-    "details": { "suites": 1, "quartos": 3, "banheiros": 2, "pessoas": 8 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Microondas", "Forno Eletrico", "Cozinha Completa", "Lavanderia"],
-    "image": "casas/casa4/1.webp"
   },
   {
     "id": "casa5",
@@ -306,49 +174,14 @@ const catalog = [
     "details": { "suites": 1, "quartos": 4, "banheiros": 3, "pessoas": 16 },
     "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
     "image": "casas/casa6/1.webp"
-  },
-  {
-    "id": "casa7",
-    "name": "Sobrado Grécia",
-    "type": "casa",
-    "price": 1550,
-    "period": "/Diária",
-    "badge": "Novo",
-    "location": "Grécia",
-    "details": { "suites": 2, "quartos": 5, "banheiros": 4, "pessoas": 18 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
-    "image": "casas/casa7/1.webp"
-  },
-  {
-    "id": "casa8",
-    "name": "Casa Riviera 3",
-    "type": "casa",
-    "price": 1200,
-    "period": "/noite",
-    "badge": "Novo",
-    "location": "Riviera",
-    "details": { "suites": 3, "quartos": 3, "banheiros": 3, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
-    "image": "casas/casa8/1.webp"
-  },
-  {
-    "id": "casa9",
-    "name": "Sobrado Riviera 4",
-    "type": "casa",
-    "price": 1300,
-    "period": "/noite",
-    "badge": "Novo",
-    "location": "Riviera",
-    "details": { "suites": 3, "quartos": 4, "banheiros": 4, "pessoas": 12 },
-    "amenities": ["Piscina", "Wi-Fi", "Ar condicionado", "Churrasqueira", "Cozinha completa", "Lavanderia"],
-    "image": "casas/casa9/1.webp"
   }
 ];
 
 const state = {
   filter: 'todos',
   people: '',
-  selected: JSON.parse(localStorage.getItem('alugaPortoSelection') || '[]')
+  selected: JSON.parse(localStorage.getItem('alugaPortoSelection') || '[]'),
+  reserveItemId: null
 };
 
 const grid = document.querySelector('#catalogGrid');
@@ -603,6 +436,7 @@ function closeModal() {
   detailsModal.classList.remove('open');
   detailsModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('no-scroll');
+  state.reserveItemId = null;
 }
 
 function showToast(message) {
@@ -720,14 +554,69 @@ function sendItemToWhatsApp(id) {
   showToast('Reserva aberta no WhatsApp.');
 }
 
+function openReserveModal(id) {
+  const item = catalog.find(product => product.id === id);
+  if (!item) return;
+
+  state.reserveItemId = id;
+
+  modalContent.innerHTML = `
+    <div class="modal-body reserve-modal-body">
+      <span class="eyebrow dark">${escapeHtml(categoryLabel(getCategory(item)))} • ${escapeHtml(item.location)}</span>
+      <h2>${escapeHtml(item.name)}</h2>
+      <p>Escolha por quantos dias você quer reservar para enviar a solicitação completa no WhatsApp.</p>
+      <label class="reserve-days-field">
+        <span>Quantidade de dias</span>
+        <select id="reserveDaysSelect">
+          <option value="1" ${formFields.days.value === '1' ? 'selected' : ''}>1 dia</option>
+          <option value="2" ${formFields.days.value === '2' ? 'selected' : ''}>2 dias</option>
+          <option value="3" ${formFields.days.value === '3' ? 'selected' : ''}>3 dias</option>
+          <option value="4" ${formFields.days.value === '4' ? 'selected' : ''}>4 dias</option>
+          <option value="5" ${formFields.days.value === '5' ? 'selected' : ''}>5 dias</option>
+          <option value="7" ${formFields.days.value === '7' ? 'selected' : ''}>7 dias</option>
+          <option value="10" ${formFields.days.value === '10' ? 'selected' : ''}>10 dias</option>
+          <option value="15" ${formFields.days.value === '15' ? 'selected' : ''}>15 dias</option>
+          <option value="30" ${formFields.days.value === '30' ? 'selected' : ''}>30 dias</option>
+        </select>
+      </label>
+      <div class="modal-actions reserve-modal-actions">
+        <button class="btn btn-ghost-dark" type="button" data-close-modal>Cancelar</button>
+        <button class="btn btn-primary" type="button" data-confirm-reserve>Enviar para o WhatsApp</button>
+      </div>
+    </div>
+  `;
+
+  detailsModal.classList.add('open');
+  detailsModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+}
+
+function confirmReserveItem() {
+  const item = catalog.find(catalogItem => catalogItem.id === state.reserveItemId);
+  const reserveDaysSelect = document.querySelector('#reserveDaysSelect');
+  if (!item || !reserveDaysSelect) return;
+
+  formFields.days.value = reserveDaysSelect.value;
+
+  const message = buildWhatsAppMessage([item], {
+    includeCustomer: false,
+    includePayment: false
+  });
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  closeModal();
+  showToast('Reserva aberta no WhatsApp.');
+}
+
 document.addEventListener('click', event => {
   const details = event.target.closest('[data-details]');
   const remove = event.target.closest('[data-remove]');
   const reserve = event.target.closest('[data-reserve]');
+  const confirmReserve = event.target.closest('[data-confirm-reserve]');
 
   if (details) openModal(String(details.dataset.details));
   if (remove) toggleSelection(String(remove.dataset.remove));
-  if (reserve) sendItemToWhatsApp(String(reserve.dataset.reserve));
+  if (reserve) openReserveModal(String(reserve.dataset.reserve));
+  if (confirmReserve) confirmReserveItem();
   if (event.target.closest('[data-close-selection]')) closeDrawer();
   if (event.target.closest('[data-close-modal]')) closeModal();
 });
