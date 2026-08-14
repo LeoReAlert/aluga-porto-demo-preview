@@ -181,7 +181,8 @@ const state = {
   filter: 'todos',
   people: '',
   selected: JSON.parse(localStorage.getItem('alugaPortoSelection') || '[]'),
-  reserveItemId: null
+  reserveItemId: null,
+  reserveUnit: 'dias'
 };
 
 const grid = document.querySelector('#catalogGrid');
@@ -453,9 +454,12 @@ function buildRequestCode() {
 
 function buildWhatsAppMessage(items, options = {}) {
   const subtotal = items.reduce((total, item) => total + Number(item.price || 0), 0);
-  const rentalDays = Number(formFields.days.value || 1);
-  const total = subtotal * rentalDays;
-  const dayLabel = rentalDays === 1 ? '1 dia' : `${rentalDays} dias`;
+  const rentalValue = Number(formFields.days.value || 1);
+  const reserveUnit = options.unit || state.reserveUnit || 'dias';
+  const total = subtotal * rentalValue;
+  const periodLabel = reserveUnit === 'horas'
+    ? `${rentalValue} hora${rentalValue === 1 ? '' : 's'}`
+    : `${rentalValue} dia${rentalValue === 1 ? '' : 's'}`;
   const requestCode = buildRequestCode();
   const serviceType = formFields.serviceType.value || 'Reserva';
   const selectedDate = document.querySelector('#dateInput').value || formFields.date.value;
@@ -507,7 +511,7 @@ function buildWhatsAppMessage(items, options = {}) {
     `Tipo: ${serviceType}`,
     `Data: ${formattedDate}`,
     `Horario: ${formattedTime}`,
-    `Periodo: ${dayLabel}`,
+    `Periodo: ${periodLabel}`,
     ...customerLines,
     MESSAGE_SEPARATOR,
     'ALUGUEL SELECIONADO',
@@ -517,7 +521,7 @@ function buildWhatsAppMessage(items, options = {}) {
     'RESUMO DE VALORES',
     '',
     `Subtotal base: ${formatMoney(subtotal)}`,
-    `Dias de locacao: ${dayLabel}`,
+    `${reserveUnit === 'horas' ? 'Horas de locacao' : 'Dias de locacao'}: ${periodLabel}`,
     `Total estimado: ${formatMoney(total)}`,
     ...paymentLines,
     notes ? `${MESSAGE_SEPARATOR}\nOBSERVACAO\n\n${notes}` : '',
@@ -559,26 +563,46 @@ function openReserveModal(id) {
   if (!item) return;
 
   state.reserveItemId = id;
+  state.reserveUnit = getCategory(item) === 'casa' ? 'dias' : 'horas';
+
+  const selectorMarkup = state.reserveUnit === 'horas'
+    ? `
+      <label class="reserve-days-field">
+        <span>Quantidade de horas</span>
+        <select id="reserveValueSelect">
+          <option value="1">1 hora</option>
+          <option value="2">2 horas</option>
+          <option value="3" selected>3 horas</option>
+          <option value="4">4 horas</option>
+          <option value="5">5 horas</option>
+          <option value="6">6 horas</option>
+          <option value="8">8 horas</option>
+        </select>
+      </label>
+    `
+    : `
+      <label class="reserve-days-field">
+        <span>Quantidade de dias</span>
+        <select id="reserveValueSelect">
+          <option value="1">1 dia</option>
+          <option value="2">2 dias</option>
+          <option value="3">3 dias</option>
+          <option value="4">4 dias</option>
+          <option value="5">5 dias</option>
+          <option value="7">7 dias</option>
+          <option value="10">10 dias</option>
+          <option value="15">15 dias</option>
+          <option value="30">30 dias</option>
+        </select>
+      </label>
+    `;
 
   modalContent.innerHTML = `
     <div class="modal-body reserve-modal-body">
       <span class="eyebrow dark">${escapeHtml(categoryLabel(getCategory(item)))} • ${escapeHtml(item.location)}</span>
       <h2>${escapeHtml(item.name)}</h2>
-      <p>Escolha por quantos dias você quer reservar para enviar a solicitação completa no WhatsApp.</p>
-      <label class="reserve-days-field">
-        <span>Quantidade de dias</span>
-        <select id="reserveDaysSelect">
-          <option value="1" ${formFields.days.value === '1' ? 'selected' : ''}>1 dia</option>
-          <option value="2" ${formFields.days.value === '2' ? 'selected' : ''}>2 dias</option>
-          <option value="3" ${formFields.days.value === '3' ? 'selected' : ''}>3 dias</option>
-          <option value="4" ${formFields.days.value === '4' ? 'selected' : ''}>4 dias</option>
-          <option value="5" ${formFields.days.value === '5' ? 'selected' : ''}>5 dias</option>
-          <option value="7" ${formFields.days.value === '7' ? 'selected' : ''}>7 dias</option>
-          <option value="10" ${formFields.days.value === '10' ? 'selected' : ''}>10 dias</option>
-          <option value="15" ${formFields.days.value === '15' ? 'selected' : ''}>15 dias</option>
-          <option value="30" ${formFields.days.value === '30' ? 'selected' : ''}>30 dias</option>
-        </select>
-      </label>
+      <p>Escolha ${state.reserveUnit === 'horas' ? 'quantas horas' : 'por quantos dias'} você quer reservar para enviar a solicitação completa no WhatsApp.</p>
+      ${selectorMarkup}
       <div class="modal-actions reserve-modal-actions">
         <button class="btn btn-ghost-dark" type="button" data-close-modal>Cancelar</button>
         <button class="btn btn-primary" type="button" data-confirm-reserve>Enviar para o WhatsApp</button>
@@ -593,14 +617,15 @@ function openReserveModal(id) {
 
 function confirmReserveItem() {
   const item = catalog.find(catalogItem => catalogItem.id === state.reserveItemId);
-  const reserveDaysSelect = document.querySelector('#reserveDaysSelect');
-  if (!item || !reserveDaysSelect) return;
+  const reserveValueSelect = document.querySelector('#reserveValueSelect');
+  if (!item || !reserveValueSelect) return;
 
-  formFields.days.value = reserveDaysSelect.value;
+  formFields.days.value = reserveValueSelect.value;
 
   const message = buildWhatsAppMessage([item], {
     includeCustomer: false,
-    includePayment: false
+    includePayment: false,
+    unit: state.reserveUnit
   });
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
   closeModal();
